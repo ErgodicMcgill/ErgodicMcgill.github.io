@@ -16,7 +16,12 @@ h1 {
     text-align: center;
     margin-top: 20px;
 }
-
+h2 {
+    color: #000000; /* A deep blue-gray color */
+    font-size: 1.5em;
+    left: 50%;
+    margin-top: 20px;
+}
 /* Example paragraph style */
 p {
     font-size: 1.2em;

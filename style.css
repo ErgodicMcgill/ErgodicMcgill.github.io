@@ -7,6 +7,7 @@ body {
     color: #333; /* A dark gray color for text */
     margin: 0;
     padding: 0;
+    overflow-x: hidden;
 }
 
 /* Example header style */
@@ -19,13 +20,60 @@ h1 {
 h2 {
     color: #000000; /* A deep blue-gray color */
     font-size: 1.5em;
-    left: 50%;
     margin-top: 20px;
+
+    position: relative;
+    margin-left: 3%;
 }
 /* Example paragraph style */
 p {
-    font-size: 1.2em;
+    font-size: 1em;
     line-height: 1.6;
-    margin: 20px;
+    margin: 10px;
     text-align: justify;
+    margin-left: 5%;
+}
+
+ul {
+
+    margin-left: 5%;
+
+}
+
+/* Button styling */
+#menuB {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Menu styling */
+#menu {
+    list-style-type: none;
+    margin: 10px 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    width: 200px;
+}
+
+#menu li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+#menu li:hover {
+    background-color: #f0f0f0;
+}
+
+.hidden {
+    display: none;
+}
+
+.email {
+    text-align: center;
+    color: #01204c; /* A deep blue-gray color */
+    font-size: 1em;
+    text-align: center;
+    margin-top: 0px;
 }

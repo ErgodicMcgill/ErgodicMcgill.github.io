@@ -2,7 +2,7 @@
 
 /* Setting a nice background color for the entire body */
 body {
-    background-color: #053d6d; /* AliceBlue, a soft and pleasant color */
+    background-color: #f0f8ff; /* AliceBlue, a soft and pleasant color */
     font-family: 'Arial', sans-serif;
     color: #333; /* A dark gray color for text */
     margin: 0;
@@ -11,7 +11,7 @@ body {
 
 /* Example header style */
 h1 {
-    color: #2c3e50; /* A deep blue-gray color */
+    color: #000000; /* A deep blue-gray color */
     font-size: 2.5em;
     text-align: center;
     margin-top: 20px;

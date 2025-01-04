@@ -1,0 +1,175 @@
+
+\documentclass[11pt]{article} 
+\usepackage[left=1in, right=1in, top=1in, bottom=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amssymb} 
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=red]{hyperref}
+\usepackage{url}
+
+%\usepackage{quiver}
+
+
+%\setlist[itemize]{label=(\roman*)}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\theoremstyle{example}
+\newtheorem{example}{Example}[section]
+
+\theoremstyle{lemma}
+\newtheorem{lemma}{Lemma}[section]
+
+\theoremstyle{proposition}
+\newtheorem{proposition}{Proposition}[section]
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem}[section]
+
+%%\input{commands.tex}
+
+\title{Week 1: 01/01 - 07/01}
+\date{}
+\begin{document}
+\maketitle
+\section{Diamon-Shurman, Chap 1}
+\subsection{Modular forms (1.1, 1.2)}
+\begin{definition}[Congruence subgroup]
+$$ \Gamma(N) = \{ matrix \in SL_2(\mathbb{Z}) : matrix = matrix mod N \} = ker(SL_2(\mathbb{Z}) \to SL_2(\mathbb{Z}/N\mathbb{Z}))$$
+A subgroup $\Gamma < SL_2(\mathbb{Z})$ is a congruence subgroup of level $N$ if $\Gamma(N) \subset \Gamma$.
+\end{definition}
+
+\begin{definition}
+For $\gamma \in SL_2(\mathbb{Z})$ and $k\in \mathbb{Z}$ we define the weight-k operator $[\gamma]_k$ on $f: \mathcal{H} \to \mathbb{C}$ by 
+$$ (f[\gamma]_k) ( \tau) = (c\tau + d)^{-k} f(\gamma(\tau))$$
+\end{definition}
+
+\begin{definition}
+Let $\Gamma$ a congruence subgroup. $f: \mathcal{H} \to \mathbb{C}$ is a modular form of weight $k$ w.r.t $\Gamma$ if 
+\begin{itemize}
+\item $f$ is holomorphic
+\item $f[\gamma]_k = f$ for all $\gamma \in \Gamma$
+\item $f[\alpha]_k$ is holomorphic at $\infty$ for all $\alpha \in SL_2(\mathbb{Z})$
+\end{itemize}
+If we add that $a_0 = 0$ in the Fourier expansion of all $f[\alpha]_k$, then $f$ is a cusp form.
+\end{definition}
+
+\subsection{Geometry (1.3, 1.4)}
+\begin{definition}
+A complex torus is a quotient of $\mathbb{C}$ by a lattice. Addition in $\mathbb{C}$ descends to the qutient to make the torus an abelian group.
+\end{definition}
+
+\begin{proposition}[Equivalence between Complex Torus and Elliptic Curve]
+Let $\mathcal{P}(z)$ be the Weirstrass function for some lattice $\Lambda$. Then,
+$$ (\mathcal{P}'(z))^2 = 4 (\mathcal{P}(z))^3 - a\mathcal{P}(z) - b$$
+where $a,b$ depend on the lattice. This property show that $(\mathcal{P}(z), \mathcal{P}'(z))$ map points in $\mathbb{C}/\lambda$ to an elliptic curve.\\
+This map works in reverse: one can produce a complex torus from an elliptic curve, whose image under $(\mathcal{P}(z), \mathcal{P}'(z))$ will be that elliptic curve.\\
+The map can be used to equip elliptic curves with an group law, that of the complex torus.
+\end{proposition}
+
+\begin{definition}[Torsion subgroup of Complex Torus and Weil pairing]
+Let $[N](z+\Lambda) = Nz + \Lambda$, and $E[N] = \{ P\in \mathbb{C}/\Lambda : [N]P = 0\}$. Let also $\mu_N = < e^{2\pi i/ N} >$, the cyclic subgroup of $C^*$.\\
+The Weil pairing $e_N$ takes two elements $P,Q$ of the torsion subgroup to one in $\mu_N$. Notably, if $P,Q$ generate $E[N]$, then $e_N(P,Q)$ is a primitive root of unity.
+\end{definition}
+
+\subsection{Modular curve}
+\begin{definition}
+Let $E$ an elliptic curve and $(P,Q)$ points that generate $E[N]$ such that $e_N(P,Q) = e^{2\pi i /N}$. Then, $(E,(P,Q)) = (E', (P', Q'))$ if there is an isomorphism of elliptic curves taking $P$ to $P'$ and $Q$ to $Q'$. The moduli space is $S(N) = \{(E, (P,Q)) \quad for  \quad \Gamma(N)\} / =$.\\
+Then, define $Y(\Gamma) = \Gamma \backslash \mathcal{H} = \{ \Gamma\tau : \tau \in \mathcal{H}\}$ to be the modular curve for $\Gamma$.
+\end{definition}
+\begin{proposition}
+There is a bijection $S(N) \equiv Y(\Gamma(N))$.
+\end{proposition}
+
+
+\subsection{Geometry of the modular curve}
+\begin{proposition}
+The surjection $\pi : \mathcal{H} \to Y(\Gamma)$ given by $\pi(\tau) = \Gamma \tau$ is a quotient map. The modular curve thus inherits a topology from that of $\mathcal{H}$. With this topology, $Y(\Gamma)$ is Haussdorf.  
+\end{proposition}
+
+\begin{definition}
+For $\tau\in \mathcal{H}$, let $\Gamma_\tau = \{ \gamma \in \Gamma : \gamma(\tau) = \tau) \}$, the isotropy subgroup of $\tau$.\\
+$\tau$ is elliptic for $\Gamma$ if $\Gamma_\tau$ is non-trivial (i.e. $\Gamma_\tau \{\pm I\} \supset \{\pm I\}$).\\ \\
+
+The goal is to make $Y(\Gamma)$ into a Riemanian surface (i.e. a complex 1-manifold). The charts around $\pi(\tau)$ will depend on $\Gamma_\tau$, as one can see $\pi(U)$ is homeomorphic to $U$ if $\Gamma_\tau$ is trivial.
+\end{definition}
+\begin{proposition}
+There exists a small enough neighborhood of $\tau \in \mathcal{H}$ such that $U$ contains no elliptic points (except maybe $\tau$ itself). Then, $\pi(U)$ will work as the neighborhood for the chart at $\pi(\tau)$.
+\end{proposition}
+
+\begin{example}
+The modular curve for the full modular group $Y(1) = SL_2(\mathbb{C})\backslash \mathcal{H}$ can be identified with the fundamental domain for $SL_2(\mathbb{Z})$, with sides identified.
+Note that every point $\tau \in \mathcal{D}$ represents an elliptic curve (up to isomorphism), by $\Lambda_\tau = \tau\mathbb{Z}\oplus\mathbb{Z}$.\\
+Note that $Y(1)$ on the Riemann sphere is a triangle with the vertex at the north pole removed. We thus compactify $Y(1)$ to obtain $X(1)$. In general:
+\end{example}
+
+\begin{definition}[Modular Curve, compactified]
+Let $\Gamma$ a congruence subgroup. Let $\mathcal{H}^* = \mathcal{H}\cup \mathbb{Q}\cup \{\infty\}$. Now, $X(\Gamma) = \Gamma\backslash\mathcal{H}^*$\\
+ Note that $X(\Gamma) = Y(\Gamma) \bigcup \Gamma\backslash(\mathbb{Q}\cup\{\infty\})$. The points in the second term are called cusps of the modular curve.
+\end{definition}
+
+
+
+
+\subsection{Hecke Operators}
+The first goal is to transform modular forms for $\Gamma_1$ into modular forms for $\Gamma_2$. This is done by the weight-k $\Gamma_1\alpha\Gamma_2$ operator. 
+\begin{definition}
+Let $\alpha\in GL_2^+(\mathbb{Q})$. The weight-k $\Gamma_1\alpha\Gamma_2$ operator $[\Gamma_1\alpha\Gamma_2]_k : \mathcal{M}_k(\Gamma_1) \to \mathcal{M}_k(\Gamma_2)$ is defined by
+$$ f[\Gamma_1\alpha\Gamma_2]_k = \sum f[\beta_j]_k$$
+where $\{\beta_j\}$ is a transversal of the orbit equivalence $\Gamma_1\curvearrowright\Gamma_1\alpha\Gamma_2$
+\end{definition}
+
+Many things are required to make this operator work as advertized. For the sum to make sense, we need the action to have finitely many orbits. Then, we need to show that for $f\in\mathcal{M}_k(\Gamma_1)$, we indeed have $ f[\Gamma_1\alpha\Gamma_2]_k\in \mathcal{M}_k(\Gamma_2)$. We only show invariance.\\
+\begin{proof}
+Let $\gamma\in \Gamma_2$. Recall that $[\beta]_k[\gamma]_k = [\beta\gamma]_k$. 
+Note that right-multiplication by $\gamma_2$ sends an orbit $\Gamma_1\beta_j$ of the action to another orbit: $(\Gamma_1\beta_j)\gamma= \Gamma_1(\beta_j\gamma)$. Hence, if $\{\beta_j \gamma\}$ is another transversal of $\Gamma_1\curvearrowright\Gamma_1\alpha\Gamma_2$, so the sums are the same.
+\end{proof}
+
+This machinery is made useful when $\Gamma_1$ and $\Gamma_2$ are related. First, note that if $\Gamma$ is a congruence subgroup, then for all $\alpha\in GL_2^+(\mathbb{Q})$,  $\alpha^{-1}\Gamma\alpha$ is too. Special things can be said, summarized in the following diagrams:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{\textit{Galois Cohomology}, J.P. Serre}
+This book is slightly too advanced for me right now (or rather, it is slightly off the path of what I must study now so I don't want to dedicate enough time to it). The content, however, seems highly intresting. I will simply state the theorems that surprised me most.\\
+Let $G$ a pro-p-group. Let $n(G)$ and $r(G)$ be the minimum number of generators and relators in any presentation of $G$. These numbers can be computed using cohomology.
+$$n(G) = dim H^1(G, \mathbb{Z}/p\mathbb{Z}) \quad r(G) = dim H^2(G, \mathbb{Z}/p\mathbb{Z}) $$
+The following inequality is due to Golod and Shafarevic: $r(G) > n(G)^2/4$.
+
+
+\section{Philo of Math, \textit{What numbers could not be}, Paul Benacerraf}
+This paper thinks about the question of numbers. What are they?\\
+Of course, the intrest lies not so much in the answers as in the questions. I feel however that this time, the answer is intresting: numbers are nothing.\\
+author first explains what previous thoughts in the litterature were. Numbers had been defined as sets, and stuff like "$3 = \{ \{ \{\emptyset\}\}\}$" were written. The author argues that "$3 = \{\emptyset, \{\emptyset, \{\emptyset\}\}\}$" serves just as well for a definition of the object $"3"$. This is a problem, for these two definitions don't give the same properties. For example, the question "is 3 a subset of 17" has different answers.\\
+The solution the author proposes is to not define numbers as anything at all. Numbers should not be thought of as "objects in a progression", but simply as "a progression". Numebrs are nothing in particular, they are virtual objects and any precise instantiation can work just as well for them ("ex: sets, julius Caesar").\\ \\
+
+I found this intresting. From what I take, this view doesn't differ from the following: "numbers are elements of a free abelian group of rank $1$". Similarily, this doesn't "fix" numbers to be precise objects; one could take $\mathbb{Z}$ but also any isomorphic group.\\
+What I find intresting is that followign the author views, nothing seems to disricminate the natural numbers against all integers. If number are but a progression, why force this progression to go in a single direction? And if so, we could define numbers as a "pointed progression", a progression with a pointed "$0$". This, however, serves only for algebraic purposes (to make numbers a group), and is perhaps not strictly needed to give a formal idea of what "numbers" should (not) be.
+
+\subsection{Intresting (and funny) quotes}
+\textit{Arithmetic is therefore the science that elaborates the abstract structure that all progressions have in common merely in virtue of being pregressions. It is not a science concerned with particular objects - the numbers. The seach for which independently identifiable particular objects the numbers really are is a misguided one.}\\ 
+
+\textit{Number theory is the elaboration of the properties of all structures of the order type of the numbers.}\\
+
+\textit{In awaiting enlightenment on the true identity of 3 we are not awaiting a proof of some deep theorem.}
+
+
+
+\end{document}

@@ -2,21 +2,54 @@
 
 /* Setting a nice background color for the entire body */
 body {
-    background-color: #f0f8ff; /* AliceBlue, a soft and pleasant color */
+    background-color: #d8edff; /* AliceBlue, a soft and pleasant color */
     font-family: 'Arial', sans-serif;
     color: #333; /* A dark gray color for text */
     margin: 0;
     padding: 0;
     overflow-x: hidden;
+
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+}
+.title {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.email {
+    text-align: center;
+    color: #01204c; /* A deep blue-gray color */
+    font-size: 1em;
+    margin: 0;
+    padding-bottom: 10px;
+
+    border-bottom: 1px solid black;
+
+}
+
+.container {
+    display: flex;
+}
+
+.section {
+    flex: 1;
+    border-left: 1px solid black;
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+
 }
 
 /* Example header style */
 h1 {
     color: #000000; /* A deep blue-gray color */
     font-size: 2.5em;
-    text-align: center;
-    margin-top: 20px;
+    text-align: center;    
+    margin: 0;
 }
+
 h2 {
     color: #000000; /* A deep blue-gray color */
     font-size: 1.5em;
@@ -70,10 +103,3 @@ ul {
     display: none;
 }
 
-.email {
-    text-align: center;
-    color: #01204c; /* A deep blue-gray color */
-    font-size: 1em;
-    text-align: center;
-    margin-top: 0px;
-}

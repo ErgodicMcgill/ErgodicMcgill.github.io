@@ -1,0 +1,144 @@
+
+\documentclass[11pt]{article} 
+\usepackage[left=1in, right=1in, top=1in, bottom=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amssymb} 
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=red]{hyperref}
+\usepackage{url}
+
+%\usepackage{quiver}
+
+
+%\setlist[itemize]{label=(\roman*)}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\theoremstyle{example}
+\newtheorem{example}{Example}[section]
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}[section]
+
+\theoremstyle{lemma}
+\newtheorem{lemma}{Lemma}[section]
+
+\theoremstyle{proposition}
+\newtheorem{proposition}{Proposition}[section]
+
+\theoremstyle{Problem}
+\newtheorem{problem}{Problem}[section]
+
+\theoremstyle{Solution}
+\newtheorem{solution}{Solution}[section]
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem}[section]
+
+%%\input{commands.tex}
+
+\title{Week 1: 01/01 - 07/01}
+\date{}
+\begin{document}
+\maketitle
+
+
+
+\section{Geometric Group Theory}
+\subsection{Refreshers from topology}
+Perhaps surprisingly, we will study groups using results from geometry. In particular, we will look at groups by realizing them as fundamental groups. The following results will be used together repeatedly.
+\begin{lemma}
+Topological spaces that are homotopic have the same fundamental group. 
+\end{lemma}
+\begin{lemma}
+Let $X$ a CW-complex, and let $A$ be a contractible subcomplex. Then, $X/A$ is homotopic to $X$. In particular, $\pi_1(X) \cong \pi_1(X/A)$.
+\end{lemma}
+
+Free groups are easily realized as topological spaces.
+\begin{lemma}
+The $n$-bouquet $B_n$ ($n\leq \infty$), the graph with $1$ vertex and $n$ edges, has $\pi_1(B_n) = F_n$.
+\end{lemma}
+\begin{proof}
+Recall $\pi_1(S^1)=\mathbb{Z}$. The $n$-bouquet is the wedge product of $S^1$ with itself $n$ times. That is, gluing of circles along a single point. Since we work only up to homotopy, the choice of point does not matter.\\
+The Van Kampen theorem then yields that $\pi_1(S^1\# S^1) = \mathbb{Z}*\mathbb{Z}$, and so on.
+\end{proof}
+
+\begin{proposition}
+If $Y$ is a covering space of $X$, then $\pi_1(Y) < \pi_1(X)$.
+\end{proposition}
+
+\subsection{Prologue}
+\begin{definition}[Free Product]
+The free product $A*B = (S, \cdot)$ of groups is the following set and product:
+\begin{itemize}
+\item S is the set of all reduced words $a_1b_1a_2b_2...a_nb_n$, where $a_i\in A$ and $b_i\in B$ are all non-identity elements except maybe $a_1$ and $b_n$,
+\item $w\cdot w'$ is the concatenation of words, followed by reduction (perform the possible operations inside of $A$ or $B$ that might happen where the words meet).
+\end{itemize}
+Note that $A$ and $B$ both live as subgroups of their free product.
+\end{definition}
+
+\begin{definition}[Free Group]
+The free group $F_n$ is a free product of $\mathbb{Z}$ with itself $n$-times, where $n\leq \infty$.
+\end{definition}
+
+
+\begin{proposition}
+Every subgroup of $F_n$ is itself free.
+\end{proposition}
+\begin{proof}
+We have $\pi_1(B_n) = F_n$. So, subgroups of $F_n$ can be determined by looking at covering spaces of $B_n$.\\
+Every covering space of $B_n$ is a graph $\Gamma$. Let $S$ a spanning tree of $\Gamma$. Since $S$ is contractible, we have $\pi_1(\Gamma) = \pi_1(\Gamma/S)$. The proof is done since $\Gamma/S$ has a single vertex, and thus is a bouquet. 
+\end{proof}
+
+The following theorem is of great importance, and is named after I. A. Gru\v{s}ko. The proof below is by Stalling.
+\begin{theorem}[Gru\v{s}ko]
+Let $\phi: F \to G$ is a surjective homomorphism where $F$ is free and $G = G_1 * G_2$.\\
+Then, $\exists F_1, F_2 < F : \phi(F_i) = G_i$ and $F = F_1 * F_2$.
+\end{theorem}
+\begin{proof}
+As before, we switch to complexes. Let $X_i$ be complex with $\pi_1(X_i) = G_i$, and let $X$ be the complex obtained by joining $X_1$ and $X_2$ by an edge. Place a point $x$ on this edge. Note that $\pi_1(X) = G$ by Van Kampen theorem.\\
+NEXT TIME (on wednesday)...\\
+At this point, we have $Y$ is a compact $2$-complex with $\pi_1(Y) = F$ so that $f:Y\to X$ is a continuous map with $f_* = \phi$. Moreover, the fiber of $x$ is a tree in $Y$.\\
+We can now finish the proof. Let $F_i = f^{-1}(X_i)$, and apply Van Kampen Theorem to $Y/f^{-1}(x) = f^{-1}(X_1) \cup f^{-1}(X_2)$, noting that their intersection is $f^{-1}(x)$, a tree. We get 
+$$F = \pi_1(Y) = \pi_1(Y/f^{-1}(x)) = \pi_1(f^{-1}(X_1))*\pi_1(f^{-1}(X_2)) = F_1*F_2$$
+So the $F_i$ are subgroups of $F$, thus free groups by the previous theorem, and we get the advertized free product equality. \\
+Note also that $f_*(F_i) = \phi(F_i) < G_i$. But since $f_*$ is surjective, and 
+\end{proof}
+
+
+
+\subsection{PS1}
+\begin{problem}
+Let $\mu(G)$ the min cardinality of a generating set of $G$. Show $\mu(G*H) = \mu(G) + \mu(H)$.
+\end{problem}
+\begin{solution}
+The case where either side is $\infty$ is the statement that a free product is not finitely generated iff one of the term is not, which is trivial.\\
+Let $X=\{g_i\}$, $Y=\{h_i\}$ be generating sets of minimal size. Then, $X\cup Y$ is a generating set for $G*H$ by definition. $|X\cup Y| = |X| + |Y|$ so we proved $\leq$.\\
+Let $T=\{t_i\}$ be any generating set for $G*H$.
+\end{solution}
+
+\begin{problem}
+Let $G$ a f.g. group. Show that for some $n$, $G=G_1*...*G_n$ for $G_i$ indecomposables.
+\end{problem}
+\begin{solution}
+Suppose $G$ is indecomposable. Then we are done. Suppose not, so $G = A*B$. Repeat the argument on $A$ and $B$, and so on. The algorithm is bound to terminate since, by problem 1, the rank of the groups strictly decrease as we go down the tree.
+\end{solution}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

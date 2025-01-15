@@ -1,0 +1,120 @@
+
+\documentclass[11pt]{article} 
+\usepackage[left=1in, right=1in, top=1in, bottom=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amssymb} 
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=red]{hyperref}
+\usepackage{url}
+
+%\usepackage{quiver}
+
+
+%\setlist[itemize]{label=(\roman*)}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\theoremstyle{example}
+\newtheorem{example}{Example}[section]
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}[section]
+
+\theoremstyle{lemma}
+\newtheorem{lemma}{Lemma}[section]
+
+\theoremstyle{proposition}
+\newtheorem{proposition}{Proposition}[section]
+
+\theoremstyle{Problem}
+\newtheorem{problem}{Problem}[section]
+
+\theoremstyle{Solution}
+\newtheorem{solution}{Solution}[section]
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem}[section]
+
+\theoremstyle{corollary}
+\newtheorem{corollary}{Corollary}[section]
+
+%%\input{commands.tex}
+
+\title{Math 583: Geometric Group Theory}
+\author{Problem Sets}
+\date{}
+\begin{document}
+\maketitle
+
+
+\section{PS1}
+\begin{problem}
+Let $\mu(G)$ the min cardinality of a generating set of $G$. Show $\mu(G_1*G_2) = \mu(G_1) + \mu(G_2)$.
+\end{problem}
+\begin{solution}
+Let $X=\{g_i\}$, $Y=\{h_i\}$ be generating sets of minimal size. Then, $X\cup Y$ is a generating set for $G_1*G_2$ by definition. $|X\cup Y| = |X| + |Y|$ so we proved $\leq$.\\
+Now, let $F \twoheadrightarrow G_1*G_2$ be a presentation with $F$ the free group of rank $\mu(G_1*G_2)$. By Gru\v{s}ko, this surjection decomposes as $F_i \twoheadrightarrow G_i$, so $\mu(G_i) \leq rk(F_i)$. But $F_1*F_2 = F$, so $\mu(G_1)+\mu(G_2) \leq rk(F_1) + rk(F_2) = rk(F) = \mu(G_1*G_2)$. This is the second inequality, so equality has been shown.\\
+\end{solution}
+
+\begin{problem}
+Let $G$ a f.g. group. Show that for some $n$, $G=G_1*...*G_n$ for $G_i$ indecomposables.
+\end{problem}
+\begin{solution}
+Suppose $G$ is indecomposable. Then we are done. Suppose not, so $G = A*B$. Repeat the argument on $A$ and $B$, and so on. The algorithm is bound to terminate since, by problem 1, the rank of the groups strictly decrease as we go down the tree.\\
+\end{solution}
+
+\begin{problem}
+Kuro\v{s} theorem: if $H < G_1*G_2$, then $H$ is the free product of free groups and conjugates of subgroups of $G_i$.
+\end{problem}
+\begin{solution}
+Let $X_i$ presentation complexes of $G_i$, $X$ the dumbell with $X_i$. By van Kampen, $\pi_1(X)= G$. Covering spaces of $X$ give subrgoups of $G$. Let $p:(Y,y)\to (X,x)$ a covering space, with $p_*(\pi(Y,y))=H$.
+ 
+Decompose $p^{-1}(X_i)=\cup Y_{ij}$ a disjoint union of sheets. Then, we claim there exists $Z,T$ 1-subcomplexes of $Y$ such that: $y\in Z,T$, $T$ is a tree such that $\pi_1(Y,y)\cong \pi_1(Z,y)\ast \ast \pi_1(Y_{ij} \cup T, y)$. Then, $Z$ is a graph so $\pi_1(Z,y)$ is free. Note that $p_*(\pi_1(Y_{ij}\cup T, y)) = p_*(\pi_1(Y_{ij}, y))$ are conjugate subgroup of $G$.
+
+Construct $T$ in the following way. Choose spanning trees $T_{ij}$ of $Y_{ij}$, $Z=p^{-1}(bar)\cup \cup T_{ij}$. Let $T$ a spanning tree of $Z$ so that $T$ contains all the $T_{ij}$. This can be done by quotienting $Z$ by all $T_ij$ and taking that quotient's spanning tree. The vertices are pulled back to the tree itself. Note that $y$ is in both $Z$ and $T$.
+
+Apply Van Kampen to $\{Z, Y_{ij}\cup T\}$. For that we need all intersections to be trees, which is easy to check. Thus we get the free decomposition of $\pi_1(Y,y)$, and so the proof is complete.\\
+\end{solution}
+
+\begin{problem}
+Let $G= G_1*G_2$. If $[g,h]\in G_1$ is nontrivial, then $g,h\in G_1$.
+\end{problem}
+\begin{solution}
+Consider $H=\langle g, h\rangle$, which by Kuro\v{s} is $H=(H\cap G_1)*(\text{conjugates of subgroups and free groups})$ where the first term is nontrivial since it contains $[g,h]$. If $H$ is not inside $G_1$, then $C$ is not trivial. By Gru\v{s}ko, the factors are both 1-generated. Then $H\cap G_1$ and $C$ are cyclic (maybe infinite). 
+
+Consider $H\to G\cap G_1$ mapping $C\mapsto 0$. But $H\cap G_1$ is abelian, so $[g,h]\mapsto 0$. But $[g,h]$ was a nontrivial element of $H\cap G_1$, so it should map to something non zero. We have contradicted the assumption that $C$ was non trivial. Thus $H=H\cap G_1$, so we are done.\\
+\end{solution}
+
+\begin{problem}
+Show that each indecomposable subgroup of $G_1*G_2$ is either $\mathbb{Z}$ or contained in a conjugate of $G_i$.
+\end{problem}
+\begin{solution}
+This follows from Kuro\v{s} theorem.\\
+\end{solution}
+
+\begin{problem}
+Show that if $G=G_1*G_2$ and for $w\in G$, $w^{-1}G_1w\cap G_i$ is not empty, then $i=1$ and $w\in G_1$.
+\end{problem}
+\begin{solution}
+Let $w^{-1}gw\in G_i$, for some nontrivial $g\in G_1$. Since $w\in G_1*G_2$, we can write $w = w_0 \widetilde{w}$ for $w_0\in G_1$, and $\widetilde{w}$ a reduced word starting with an element of $G_2$. Then, $w^{-1}gw = \widetilde{w}^{-1} g' \widetilde{w}$ for $g' = w_0^{-1}gw_0$. In particular, $g'$ is still in $G_1$.
+
+But $\widetilde{w}^{-1} g' \widetilde{w}$ is an already reduced word inside $G_1$, so no elements of $G_2$ can appear in the expression. Thus, $\widetilde{w} = 1$. Hence, $w = w_0\in G_1$, and so $w^{-1}G_1 w = G_1$. Since $G_1 \cap G_2$ is empty, $w^{-1}G_1w\cap G_i = G_1 \cap G_i$ nontrivial forces $i=1$.\\
+\end{solution}
+
+\begin{problem}
+Let $G$ be finitely generated. If $G=G_1*...*G_n = H_1*...*H_m$, then $m=n$ and $G_i$ is isomorphic to a conjugate of $H_i$ up to permutation.
+\end{problem}
+\begin{solution}
+If all $G_i$ are $\mathbb{Z}$, then $G$ is free and so the subgroups $H_j$ are also $\mathbb{Z}$. By equality of rank, we obtain the result.
+
+Suppose, after reordering, that $G_i$ is not $\mathbb{Z}$ for $i\leq k$, and $H_j$ is not $\mathbb{Z}$ for $j\leq k'$. Then, $G_1$ is a (not free) subgroup of the free product of the $H_i$, so $G_1<wH_1w^{-1}$ for some $w\in G$ (we choose $H_1$ without loss of generality). Similarily, $H_1 < vG_iv^{-1}$ for some $i$, so we have. Notice $wvG_i(wv)^{-1}\cap G_1$ is nontrivial, so by Q6, we have $wv \in G_1$. Now,
+$$G_1 < wvG_i(wv)^{-1} < wH_1w^{-1} < G_1$$
+Hence, $G_1$ and $H_1$ are conjugate, thus isomorphic. Apply the same idea to every $G_i$ (up to reordering the $H_i$) for $1\leq i \leq k$, so that every $G_i$ is isomorphic to some $H_j$. We need to check that no two $G_i$ go to the same $H_i$. This is automatic because if it's the case, then $G_i$ is conjugate to $G_j$ and Q6 again, $i=j$.
+
+Note now that $G_1*...*G_k \cong H_1*...H_k$. Letting $G'$ be the normal closure of $G_1*...*G_k$ and $H'$ similarily, we have $G/G'=G/H' = G_{k+1}*...*G_n = H_{k+1}*...*H_m$. This forces $H_i$ to be $\mathbb{Z}$ for $k+1\leq i \leq m$, and by a rank argument, $n-k = m-k$, so $n=m$.\\
+\end{solution}
+\end{document}

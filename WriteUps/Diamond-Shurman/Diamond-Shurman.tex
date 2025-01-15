@@ -1,4 +1,3 @@
-
 \documentclass[11pt]{article} 
 \usepackage[left=1in, right=1in, top=1in, bottom=1in]{geometry}
 \usepackage{amsmath}
@@ -14,6 +13,7 @@
 
 
 %\setlist[itemize]{label=(\roman*)}
+\theoremstyle{plain}
 
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}[section]
@@ -41,16 +41,18 @@
 
 \theoremstyle{corollary}
 \newtheorem{corollary}{Corollary}[section]
+
 %%\input{commands.tex}
 
-\title{Week 2: 01/08 - 01/14}
+\title{A First Course in Modular Forms}
+\author{F. Diamond, J. Shurman}
 \date{}
 \begin{document}
 \maketitle
 
 
 
-\section{Diamond,Shurman - Chapter 1: Modular Forms, Elliptic Curves, and Modular Curves}
+\section{Chapter 1: Modular Forms, Elliptic Curves, and Modular Curves}
 The goal of this chapter is to define the objects in the title. Importantly, we will develop different languages to talk about elliptic curves. A point of great interest will be that elliptic curves and complex torii are in bijection.
 
 \subsection{1.1-1.2: Modular forms}
@@ -434,98 +436,55 @@ So indeed, $a_0=0$ and $a_1=(2\pi)^{12}$. We wish to emphasize the miraculous eq
 $$\left(\frac{2\cdot60}{90}\right)^3 = 27\left(\frac{280}{945}\right)^2 \qquad 60^3\cdot3\left(\frac{2}{90}\right)^2\left(\frac{32}{3!}\right) + 27\left(140^2\cdot2\left(\frac{2}{945}\right)\left(\frac{128}{5!}\right)\right) = (2\pi)^{12}$$
 \end{proof}
 
+\newpage
 
-
-
-
-
-
-
-
-\section{GGT}
-\subsection{Lecture Notes}
-The following theorem is of great importance, and is named after I. A. Gru\v{s}ko. The proof below is by Stalling.
-\begin{theorem}[Gru\v{s}ko]
-Let $\phi: F \to G$ is a surjective homomorphism where $F$ is free and $G = G_1 * G_2$.\\
-Then, $\exists F_1, F_2 < F : \phi(F_i) = G_i$ and $F = F_1 * F_2$.
-\end{theorem}
-\begin{proof}
-As before, we switch to complexes. Let $X_i$ be complex with $\pi_1(X_i) = G_i$, and let $X$ be the complex obtained by joining $X_1$ and $X_2$ by an edge. Place a point $x$ on this edge. Note that $\pi_1(X) = G$ by Van Kampen theorem.
-
-
-We can find $Y$ compact $2$-complex with $\pi_1(Y) = F$ so that $f:Y\to X$ is a continuous map with $f_* = \phi$. Our goal is to show that the fiber of $x$ is a tree in $Y$.
-
-We can now finish the proof. Let $F_i = f^{-1}(X_i)$, and apply Van Kampen Theorem to $Y/f^{-1}(x) = f^{-1}(X_1) \cup f^{-1}(X_2)$, noting that their intersection is $f^{-1}(x)$, a tree. We get 
-$$F = \pi_1(Y) = \pi_1(Y/f^{-1}(x)) = \pi_1(f^{-1}(X_1))*\pi_1(f^{-1}(X_2)) = F_1*F_2$$
-So the $F_i$ are subgroups of $F$, thus free groups by the previous theorem, and we get the advertized free product equality. \\
-Note also that $f_*(F_i) = \phi(F_i) < G_i$. But since $f_*$ is surjective we must have equality. 
-
-
-To find the objects in our goal, we do the following. In general, $f^{-1}(x)$ is a forest. We decrease the number of components by finding a path $l\in Y^{(1)}$ connecting different trees, and so that $f(l)$ falls to a trivial element of $\pi_1(X_i)$. If we can do that, then attach an edge $e$ to the ends of $l$ and a cell $D$ delimited by $e\cup l$. Since $f(l)$ is trivial, we can extend $f$ so that $f^{-1}(x)$ now contains $e$.
-
-To find $l$, start with an edge path $L$ joining trees in $f^{-1}(x)$. By surjectivity of $\phi=f_*$, we can find $\gamma$ a closed edge-path in $Y$ based at the starting point of $L$ with $[f(\gamma)] = [f(L)]$ in $\pi_1(X)$. Let $l=\gamma^{-1}L$. This is a path with $f^{-1}(l)$ trivial in $\pi_1(X)$. Patrtition $l=l_1l_2...l_n$ where all the endpoints aree in $f^{-1}(x)$, and $l_i$ is mapped alternatingly in $X_1$ and $X_2$. Let $g_j=[f(l_j)]$. If $g_j=1$, but then endpoints of $l_j$ lie on the same tree in $f^{-1}(x)$, we can replace $l_j$ by a path in $f^{-1}(x)$ which we merge with $l_{j-1}$ and $l_{j+1}$. At this point, $[f(l)] = 1 = g_1....g_n$ lying alternatingly in $G_1$ and $G_2$. So at least one $g_j$ is trivial, and $l_j$ is the desired path.
-\end{proof}
-
-
-\section{The Amalgamated Product}
-In what follows, we have spaces $X_1$ and $X_2$, an open cover for $X$, with fundamental groups $G_1$ and $G_2$, and $X_0 = X_1\cap X_2$ with fundamental group $G_0$.
-
-\begin{definition}[Amalgamated product]
-The amalgamated product of groups $G_1 \ast_{G_0} G_2$ is a quotient of the free product.
-The data are injections $\phi_i : G_0 \hookrightarrow G_i$. Then,
-$$G_1 \ast_{G_0} G_2 = G_1 * G_2 / \ll \phi_1(g)\phi_2(g)^{-1} : \forall g \in G_0\gg$$
-\end{definition}
-Suppose we only know $\phi_i : G_0 \hookrightarrow G_i$, and want to build $X$ whose fundamental group is the amalgamated product. The next corollary follows directly from Van Kampen's theorem. Recall that every $\phi$ is induced by some $f$ with appropriate fundamental groups, so let $\phi_i = (f_i)_*$.
-\begin{corollary}
-The space $X = X_1\cup X_0 \times [0,1] \cup X_2/\sim$, with the relation $(x,0) \sim f_1(x)$ and $(x,1) \sim f_2(x)$. 
-\end{corollary}
-To understand the structure of the amalgamated product, we want to understand its subgroups. To do so, we look at the covers. A good place to start is with the universal cover. We first look at one side of the dumbell.
-\begin{lemma}
-The universal cover of $Y_1=X_1\cup X_0\times[0,1]/\sim$ is $\widetilde{Y_1} = \widetilde{X_1} \cup \bigsqcup\widetilde{X_0}\times [0,1]/\sim$.
-\end{lemma}
-\begin{proof}
-Let $p:\widetilde{Y_i}\to Y_i$ be the universal cover. First, we show $\widetilde{X_0}\times [0,1]$ are the components of $p^{-1}(X_0\times[0,1])$. If not, then there is $\alpha$ some loop in $X_0$ giving a nontrivial element in $\pi_1(X_0)$, and it lifts to a loop $\tilde{\alpha}$ in $\widetilde{X_0}\times [0,1]$. Since $\phi^i$ is injective (by the data), $\phi^i(\alpha)$ is a non-trivial element of $\pi_1(X_1)$, so it's lift $\tilde{alpha}$ must have disjoint endopoints, contradicting that $\tilde{\alpha}$ was a loop.
-
-Then, $\widetilde{Y_1}$ is a copy of $\widetilde{X_1}$ with copys of $\widetilde{X_0}\times [0,1]$ glued via the lifts $\widetilde{X_0}\to\widetilde{X_i}$ of $f^i$.
-\end{proof}
-	
+\subsection{Geometry of the modular curve}
 \begin{proposition}
-The universal cover of $X= X_1\cup X_0 \times [0,1] \cup X_2/\sim$ is copies of $\widetilde{Y_1}$ and $\widetilde{Y_2}$ glued in a tree like fashion by cylinders $\widetilde{X_0}$. 
+The surjection $\pi : \mathcal{H} \to Y(\Gamma)$ given by $\pi(\tau) = \Gamma \tau$ is a quotient map. The modular curve thus inherits a topology from that of $\mathcal{H}$. With this topology, $Y(\Gamma)$ is Haussdorf.  
 \end{proposition}
 
+\begin{definition}
+For $\tau\in \mathcal{H}$, let $\Gamma_\tau = \{ \gamma \in \Gamma : \gamma(\tau) = \tau) \}$, the isotropy subgroup of $\tau$.\\
+$\tau$ is elliptic for $\Gamma$ if $\Gamma_\tau$ is non-trivial (i.e. $\Gamma_\tau \{\pm I\} \supset \{\pm I\}$).\\ \\
 
-\subsection{PS}
-The following have been solved, but I do not write the solutions publicly for obvious reasons.
-\begin{problem}
-Let $\mu(G)$ the min cardinality of a generating set of $G$. Show $\mu(G_1*G_2) = \mu(G_1) + \mu(G_2)$.
-\end{problem}
+The goal is to make $Y(\Gamma)$ into a Riemanian surface (i.e. a complex 1-manifold). The charts around $\pi(\tau)$ will depend on $\Gamma_\tau$, as one can see $\pi(U)$ is homeomorphic to $U$ if $\Gamma_\tau$ is trivial.
+\end{definition}
+\begin{proposition}
+There exists a small enough neighborhood of $\tau \in \mathcal{H}$ such that $U$ contains no elliptic points (except maybe $\tau$ itself). Then, $\pi(U)$ will work as the neighborhood for the chart at $\pi(\tau)$.
+\end{proposition}
 
+\begin{example}
+The modular curve for the full modular group $Y(1) = SL_2(\mathbb{C})\backslash \mathcal{H}$ can be identified with the fundamental domain for $SL_2(\mathbb{Z})$, with sides identified.
+Note that every point $\tau \in \mathcal{D}$ represents an elliptic curve (up to isomorphism), by $\Lambda_\tau = \tau\mathbb{Z}\oplus\mathbb{Z}$.\\
+Note that $Y(1)$ on the Riemann sphere is a triangle with the vertex at the north pole removed. We thus compactify $Y(1)$ to obtain $X(1)$. In general:
+\end{example}
 
-\begin{problem}
-Let $G$ a f.g. group. Show that for some $n$, $G=G_1*...*G_n$ for $G_i$ indecomposables.
-\end{problem}
-
-
-\begin{problem}
-Kuro\v{s} theorem: if $H < G_1*G_2$, then $H$ is the free product of free groups and conjugates of subgroups of $G_i$.
-\end{problem}
-
-\begin{problem}
-Let $G= G_1*G_2$. If $[g,h]\in G_1$ is nontrivial, then $g,h\in G_1$.
-\end{problem}
-
-\begin{problem}
-Show that each indecomposable subgroup of $G_1*G_2$ is either $\mathbb{Z}$ or contained in a conjugate of $G_i$.
-\end{problem}
+\begin{definition}[Modular Curve, compactified]
+Let $\Gamma$ a congruence subgroup. Let $\mathcal{H}^* = \mathcal{H}\cup \mathbb{Q}\cup \{\infty\}$. Now, $X(\Gamma) = \Gamma\backslash\mathcal{H}^*$\\
+ Note that $X(\Gamma) = Y(\Gamma) \bigcup \Gamma\backslash(\mathbb{Q}\cup\{\infty\})$. The points in the second term are called cusps of the modular curve.
+\end{definition}
 
 
-\begin{problem}
-Show that if $G=G_1*G_2$ and for $w\in G$, $w^{-1}G_1w\cap G_i$ is not empty, then $i=1$ and $w\in G_1$.
-\end{problem}
 
 
-\begin{problem}
-Let $G$ be finitely generated. If $G=G_1*...*G_n = H_1*...*H_m$, then $m=n$ and $G_i$ is isomorphic to a conjugate of $H_i$ up to permutation.
-\end{problem}
+\subsection{Hecke Operators}
+The first goal is to transform modular forms for $\Gamma_1$ into modular forms for $\Gamma_2$. This is done by the weight-k $\Gamma_1\alpha\Gamma_2$ operator. 
+\begin{definition}
+Let $\alpha\in GL_2^+(\mathbb{Q})$. The weight-k $\Gamma_1\alpha\Gamma_2$ operator $[\Gamma_1\alpha\Gamma_2]_k : \mathcal{M}_k(\Gamma_1) \to \mathcal{M}_k(\Gamma_2)$ is defined by
+$$ f[\Gamma_1\alpha\Gamma_2]_k = \sum f[\beta_j]_k$$
+where $\{\beta_j\}$ is a transversal of the orbit equivalence $\Gamma_1\curvearrowright\Gamma_1\alpha\Gamma_2$
+\end{definition}
+
+Many things are required to make this operator work as advertized. For the sum to make sense, we need the action to have finitely many orbits. Then, we need to show that for $f\in\mathcal{M}_k(\Gamma_1)$, we indeed have $ f[\Gamma_1\alpha\Gamma_2]_k\in \mathcal{M}_k(\Gamma_2)$. We only show invariance.\\
+\begin{proof}
+Let $\gamma\in \Gamma_2$. Recall that $[\beta]_k[\gamma]_k = [\beta\gamma]_k$. 
+Note that right-multiplication by $\gamma_2$ sends an orbit $\Gamma_1\beta_j$ of the action to another orbit: $(\Gamma_1\beta_j)\gamma= \Gamma_1(\beta_j\gamma)$. Hence, if $\{\beta_j \gamma\}$ is another transversal of $\Gamma_1\curvearrowright\Gamma_1\alpha\Gamma_2$, so the sums are the same.
+\end{proof}
+
+This machinery is made useful when $\Gamma_1$ and $\Gamma_2$ are related. First, note that if $\Gamma$ is a congruence subgroup, then for all $\alpha\in GL_2^+(\mathbb{Q})$,  $\alpha^{-1}\Gamma\alpha$ is too.
+
+
+
+
 
 \end{document}

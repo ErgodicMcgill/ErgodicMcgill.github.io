@@ -122,13 +122,20 @@ Let $\phi: F \to G$ is a surjective homomorphism where $F$ is free and $G = G_1 
 Then, $\exists F_1, F_2 < F : \phi(F_i) = G_i$ and $F = F_1 * F_2$.
 \end{theorem}
 \begin{proof}
-As before, we switch to complexes. Let $X_i$ be complex with $\pi_1(X_i) = G_i$, and let $X$ be the complex obtained by joining $X_1$ and $X_2$ by an edge. Place a point $x$ on this edge. Note that $\pi_1(X) = G$ by Van Kampen theorem.\\
-NEXT TIME (on wednesday)...\\
-At this point, we have $Y$ is a compact $2$-complex with $\pi_1(Y) = F$ so that $f:Y\to X$ is a continuous map with $f_* = \phi$. Moreover, the fiber of $x$ is a tree in $Y$.\\
+As before, we switch to complexes. Let $X_i$ be complex with $\pi_1(X_i) = G_i$, and let $X$ be the complex obtained by joining $X_1$ and $X_2$ by an edge. Place a point $x$ on this edge. Note that $\pi_1(X) = G$ by Van Kampen theorem.
+
+
+We can find $Y$ compact $2$-complex with $\pi_1(Y) = F$ so that $f:Y\to X$ is a continuous map with $f_* = \phi$. Our goal is to show that the fiber of $x$ is a tree in $Y$.
+
 We can now finish the proof. Let $F_i = f^{-1}(X_i)$, and apply Van Kampen Theorem to $Y/f^{-1}(x) = f^{-1}(X_1) \cup f^{-1}(X_2)$, noting that their intersection is $f^{-1}(x)$, a tree. We get 
 $$F = \pi_1(Y) = \pi_1(Y/f^{-1}(x)) = \pi_1(f^{-1}(X_1))*\pi_1(f^{-1}(X_2)) = F_1*F_2$$
 So the $F_i$ are subgroups of $F$, thus free groups by the previous theorem, and we get the advertized free product equality. \\
-Note also that $f_*(F_i) = \phi(F_i) < G_i$. But since $f_*$ is surjective, and 
+Note also that $f_*(F_i) = \phi(F_i) < G_i$. But since $f_*$ is surjective we must have equality. 
+
+
+To find the objects in our goal, we do the following. In general, $f^{-1}(x)$ is a forest. We decrease the number of components by finding a path $l\in Y^{(1)}$ connecting different trees, and so that $f(l)$ falls to a trivial element of $\pi_1(X_i)$. If we can do that, then attach an edge $e$ to the ends of $l$ and a cell $D$ delimited by $e\cup l$. Since $f(l)$ is trivial, we can extend $f$ so that $f^{-1}(x)$ now contains $e$.
+
+To find $l$, start with an edge path $L$ joining trees in $f^{-1}(x)$. By surjectivity of $\phi=f_*$, we can find $\gamma$ a closed edge-path in $Y$ based at the starting point of $L$ with $[f(\gamma)] = [f(L)]$ in $\pi_1(X)$. Let $l=\gamma^{-1}L$. This is a path with $f^{-1}(l)$ trivial in $\pi_1(X)$. Patrtition $l=l_1l_2...l_n$ where all the endpoints aree in $f^{-1}(x)$, and $l_i$ is mapped alternatingly in $X_1$ and $X_2$. Let $g_j=[f(l_j)]$. If $g_j=1$, but then endpoints of $l_j$ lie on the same tree in $f^{-1}(x)$, we can replace $l_j$ by a path in $f^{-1}(x)$ which we merge with $l_{j-1}$ and $l_{j+1}$. At this point, $[f(l)] = 1 = g_1....g_n$ lying alternatingly in $G_1$ and $G_2$. So at least one $g_j$ is trivial, and $l_j$ is the desired path.
 \end{proof}
 
 
@@ -146,33 +153,23 @@ The space $X = X_1\cup X_0 \times [0,1] \cup X_2/\sim$, with the relation $(x,0)
 \end{corollary}
 To understand the structure of the amalgamated product, we want to understand its subgroups. To do so, we look at the covers. A good place to start is with the universal cover. We first look at one side of the dumbell.
 \begin{lemma}
-The universal cover of $X=X_1\cup X_0\times[0,1]/\sim$ is $\widetilde{X} = \widetilde{X_1} \cup \widetilde{X_0}\times [0,1]$.
+The universal cover of $Y_1=X_1\cup X_0\times[0,1]/\sim$ is $\widetilde{Y_1} = \widetilde{X_1} \cup \bigsqcup\widetilde{X_0}\times [0,1]/\sim$.
 \end{lemma}
 \begin{proof}
+Let $p:\widetilde{Y_i}\to Y_i$ be the universal cover. First, we show $\widetilde{X_0}\times [0,1]$ are the components of $p^{-1}(X_0\times[0,1])$. If not, then there is $\alpha$ some loop in $X_0$ giving a nontrivial element in $\pi_1(X_0)$, and it lifts to a loop $\tilde{\alpha}$ in $\widetilde{X_0}\times [0,1]$. Since $\phi^i$ is injective (by the data), $\phi^i(\alpha)$ is a non-trivial element of $\pi_1(X_1)$, so it's lift $\tilde{alpha}$ must have disjoint endopoints, contradicting that $\tilde{\alpha}$ was a loop.
 
+Then, $\widetilde{Y_1}$ is a copy of $\widetilde{X_1}$ with copys of $\widetilde{X_0}\times [0,1]$ glued via the lifts $\widetilde{X_0}\to\widetilde{X_i}$ of $f^i$.
+\end{proof}
+	
+\begin{proposition}
+The universal cover of $X= X_1\cup X_0 \times [0,1] \cup X_2/\sim$ is copies of $\widetilde{Y_1}$ and $\widetilde{Y_2}$ glued in a tree like fashion by cylinders $\widetilde{X_0}$. 
+\end{proposition}
+\begin{proof}
+This construction is simply connected.
 \end{proof}
 
-\begin{proposition}
-The universal cover of $X= X_1\cup X_0 \times [0,1] \cup X_2/\sim$ is 
-\end{proposition}
 
-\section{Problem Sets}
-\subsection{PS1}
-\begin{problem}
-Let $\mu(G)$ the min cardinality of a generating set of $G$. Show $\mu(G*H) = \mu(G) + \mu(H)$.
-\end{problem}
-\begin{solution}
-The case where either side is $\infty$ is the statement that a free product is not finitely generated iff one of the term is not, which is trivial.\\
-Let $X=\{g_i\}$, $Y=\{h_i\}$ be generating sets of minimal size. Then, $X\cup Y$ is a generating set for $G*H$ by definition. $|X\cup Y| = |X| + |Y|$ so we proved $\leq$.\\
-Let $T=\{t_i\}$ be any generating set for $G*H$.
-\end{solution}
 
-\begin{problem}
-Let $G$ a f.g. group. Show that for some $n$, $G=G_1*...*G_n$ for $G_i$ indecomposables.
-\end{problem}
-\begin{solution}
-Suppose $G$ is indecomposable. Then we are done. Suppose not, so $G = A*B$. Repeat the argument on $A$ and $B$, and so on. The algorithm is bound to terminate since, by problem 1, the rank of the groups strictly decrease as we go down the tree.
-\end{solution}
 
 
 

@@ -169,11 +169,52 @@ This construction is simply connected.
 \end{proof}
 
 
+\begin{corollary}[Normal Form]
+Let $G=G_1 \ast_{G_0}G_2$. For all $g\in G\backslash G_0$, $g=g_1h_1g_2h_2...g_nh_n$. Moreover, this expression is unique up to inserting $g_0g_0^{-1}$ in the following way: $g_ih_i = (g_ig_0)(g_0^{-1}h_i)$.
+\end{corollary}
 
 
+\subsection{Bass-Serre Theory}
 
+\begin{definition}
+The Bass-Serre tree is the tree obtained by collapsing $\widetilde{X_i}$ to vertices and $\widetilde{X_0}\times[0,1]$ to edges in the fundamental cover of $X$.
+\end{definition}
 
+\begin{corollary}
+The group $G$ acts on it's Bass-Serre tree.
+\end{corollary}
 
+The Bass-Serre tree $\Gamma=(V,E)$ can be defined purely algebraically as follows. Recall the data: $G=G_1 \ast_{G_0}G_2$ (in particular, injections $G_0 \hookrightarrow G_i$). This description will allow us to say things about the graph.
+\begin{itemize}
+\item V is the set of cosets $gG_1$, $gG_2$ for $g\in G$.
+\item Edges are cosets $gG_0$ for $g\in G$.
+\end{itemize}
+\begin{proposition}
+The degree of a vertex $v=gG_i$ is $[G_i: G_0]$ (note that it does not depend on $g$).
+The action of $h\in G$ on a vertex $v=gG_i$ is $h(v)=h(gG_i)=(hg)G_i$, and the action on edges is induced.
+\end{proposition}
+
+\begin{example}
+\end{example}
+
+The Bass-Serre tree can be endowed with extra structure: it is a graph of groups.
+\begin{definition}
+A graph of group $\mathfrak{G}$ is three things:
+\begin{itemize}
+\item A graph $\Gamma = (V,E)$.
+\item A collection of groups $G_v$ for all vertices, and $G_e$ for all edges,
+\item For all edge $e=(v,w)$, injective homomorphisms $\phi_e^v:G_e \to G_v$ and $\phi_e^w:G_e \to G_w$.
+\end{itemize}
+\end{definition}
+In a similar fashion, we can define a graph of spaces:
+\begin{definition}
+A graph of spaces $\mathfrak{X}$ is three things:
+\begin{itemize}
+\item A graph $\Gamma = (V,E)$.
+\item A collection of spaces $X_v$ for all vertices, 
+\item For all edge $e=(v,w)$, injective maps $f_e^v:G_e \to G_v$ and $f_e^w:G_e \to G_w$.
+\end{itemize}
+\end{definition}
 
 
 

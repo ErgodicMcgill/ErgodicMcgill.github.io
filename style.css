@@ -60,7 +60,7 @@ h2 {
 }
 /* Example paragraph style */
 p {
-    font-size: .5em;
+    font-size: .4em;
     line-height: 1.6;
     margin: 10px;
     text-align: left;
@@ -68,7 +68,7 @@ p {
 }
 
 p2{
-    font-size: 0.7em;
+    font-size: 1em;
     line-height: 1.6;
     margin: 10px;
     text-align: left;

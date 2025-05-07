@@ -35,6 +35,7 @@ body {
 
 .section {
     flex: 1;
+
     border-left: 1px solid black;
     padding: 20px;
     box-sizing: border-box;
@@ -53,10 +54,20 @@ h1 {
 h2 {
     color: #000000; /* A deep blue-gray color */
     font-size: 1em;
-    margin-top: 20px;
+    margin-top: 15px;
 
     position: relative;
     margin-left: 3%;
+}
+
+h3 {
+    color: #000000; /* A deep blue-gray color */
+    font-size: 3em;
+    margin-top: 15px;
+    margin-bottom: 15px;
+
+    position: relative;
+    text-align: center;
 }
 /* Example paragraph style */
 p {
@@ -72,41 +83,14 @@ p2{
     line-height: 1.6;
     margin: 10px;
     text-align: left;
-    margin-left: 10%;
+    margin-left: 2%;
 }
-ul {
 
+p3{
+    font-size: 1em;
+    line-height: 1.6;
+    margin-top: 0px;
+    text-align: left;
     margin-left: 5%;
-
-}
-
-/* Button styling */
-#menuB {
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-/* Menu styling */
-#menu {
-    list-style-type: none;
-    margin: 10px 0;
-    padding: 0;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    width: 200px;
-}
-
-#menu li {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-}
-
-#menu li:hover {
-    background-color: #f0f0f0;
-}
-
-.hidden {
-    display: none;
 }
 

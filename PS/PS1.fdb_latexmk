@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1746572883.21874 "c:/Users/lurid/Documents/GitHub/luridovet.github.io/PS/PS1.tex" "PS1.pdf" "PS1" 1746572884.28658 0
+["pdflatex"] 1746592219.01412 "c:/Users/lurid/Documents/GitHub/luridovet.github.io/PS/PS1.tex" "PS1.pdf" "PS1" 1746592222.55611 0
   "C:/Users/lurid/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1741462766 81919 f03c646d66c2441846ff09182cd09695 ""
   "C:/Users/lurid/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1704993726 24224934 cff01e6713e20657b71e8230df5d2ecd ""
   "C:/Users/lurid/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1233951848 1004 54797486969f23fa377b128694d548df ""
@@ -93,10 +93,10 @@
   "C:/Users/lurid/AppData/Local/Programs/MiKTeX/tex/latex/refcount/refcount.sty" 1576433952 9878 9e94e8fa600d95f9c7731bb21dfb67a4 ""
   "C:/Users/lurid/AppData/Local/Programs/MiKTeX/tex/latex/rerunfilecheck/rerunfilecheck.sty" 1657800696 9714 ba3194bd52c8499b3f1e3eb91d409670 ""
   "C:/Users/lurid/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
-  "PS1.aux" 1746572884 162 55205a9e8a8eca30d36afb389b0617bf "pdflatex"
-  "PS1.out" 1746572884 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "PS1.tex" 1746572882 2308 b96c4b7ebcc5653e13f199df65406fc8 ""
-  "c:/Users/lurid/Documents/GitHub/luridovet.github.io/PS/PS1.tex" 1746572882 2308 b96c4b7ebcc5653e13f199df65406fc8 ""
+  "PS1.aux" 1746592222 162 55205a9e8a8eca30d36afb389b0617bf "pdflatex"
+  "PS1.out" 1746592221 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "PS1.tex" 1746592214 2336 b17f35a200506b2e09b42e362865e819 ""
+  "c:/Users/lurid/Documents/GitHub/luridovet.github.io/PS/PS1.tex" 1746592214 2336 b17f35a200506b2e09b42e362865e819 ""
   (generated)
   "PS1.aux"
   "PS1.log"

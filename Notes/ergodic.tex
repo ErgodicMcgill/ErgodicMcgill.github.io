@@ -431,7 +431,7 @@
     Observe that $[A]_{\E_T}=\bigcup_{n,m\in\Z}T^{-n}(T^m(A))$, so $[A]_{\E_T}$ is not \textit{a priori} measurable. It turns out that $[A]_{\E_T}$ is measurable by a theorem of Descriptive Set Theory (which one?), but we can avoid it with the following theorem, which is of independent interest.
 
     \begin{theorem}[Poincaré Recurrence]\label{thm:poincare_recurrence}
-        Every measurable set $A\subeq X$ is $a.e.$-forward recurrent, i.e., for a.e. $x\in X$, we have $T^n(x)\in A$ for some $n\geq1$.
+        Every measurable set $A\subeq X$ is $a.e.$-forward recurrent, i.e., there is a measurable set $A_0\subeq X$ such that $A_0=_\mu A$ and for each $x\in A_0$, we have $T^n(x)\in A_0$ for some $n\geq1$.
     \end{theorem}
     \begin{proof}
         Let $W\coloneqq\bigcap_{n\geq1}\l\{x\in A\st T^n(x)\not\in A\r\}$, which is clearly measurable. Note that $W\cap T^{-n}(W)=\e$ for each $n\geq1$, so the family $\l\{T^{-n}(W)\r\}_{n\in\N}$ is pairwise-disjoint, and hence $W$ is \textit{wandering}:

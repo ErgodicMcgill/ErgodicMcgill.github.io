@@ -1,0 +1,58 @@
+\documentclass[reqno, twoside]{article}
+\input{preamble.sty}
+\input{macros.sty}
+
+\begin{document}
+    \title{\textbf{\normalsize\MakeUppercase{Summer 2025 Reading Group on Ergodic Theory}}}
+    \author{\normalsize\textsc{Exercise Sheet 4 (Zhaoshen Zhai): Ergodic Actions and its Consequences}}
+    \date{}
+    \maketitle
+    \freefootnote{\textit{Date}: \today.}
+
+    Throughout, let $\lambda$ denote the Lebesgue measure on $\R$ (or on $[0,1]$) and let $\mu$ denote the Bernoulli$(1/2)$-measure on $2^\N$. The purpose of this exercise sheet is two-fold.
+    \begin{enumerate}
+        \item To introduce and give examples of ergodic \textit{actions} of a group $G\act(X,\mu)$.
+            \vspace{-0.05in}
+        \item To show how ergodicity gives rise to non-measurable sets.
+    \end{enumerate}
+
+    \begin{definition*}
+        Let $G$ be a group and let $(X,\mu)$ be a standard measure space. An action $\phi:G\act X$ is
+        \begin{itemize}
+            \item \textit{Borel} if for each $g\in G$, the map $x\mapsto gx$ is Borel.
+                \vspace{-0.05in}
+            \item \textit{measure-preserving} if it is Borel and $\mu(gB)=\mu(B)$ for each $g\in G$ and each Borel $B\subeq X$.
+                \vspace{-0.05in}
+            \item \textit{ergodic} if it is measure-preserving and the orbit equivalence relation $\E_\phi$ of $\phi$ is ergodic.
+        \end{itemize}
+    \end{definition*}
+
+    \begin{exercise}\label{1}
+        Let $(X,\mu)$ be an atomless standard probability space and let $\phi:G\act(X,\mu)$ be a pmp action. Prove that if $\phi$ is ergodic, then every transversal of $\E_\phi$ is non-measurable.
+
+        \textsc{Hint}: Let $T\subeq X$ be a measurable transversal, so $X=\bigsqcup_{g\in G}gT$. Observe that $\mu(T)>0$, and use that $(X,\mu)$ is atomless to partition $T=S_1\sqcup S_2$ non-trivially. What can you say about the $\E_\phi$-saturations of $S_i$?
+    \end{exercise}
+
+    \begin{exercise}
+        Consider the translation action $\phi:\Q\act(\R,\lambda)$, whose orbit equivalence relation is given by $x\E_\Q y$ iff $x-y\in\Q$. Use the 99\% Lemma for $\lambda$ to show that $\phi$ is ergodic.
+    \end{exercise}
+
+    \begin{remark*}
+        Transversals for $\E_\Q$ (restricted to $[0,1]$), called \textit{Vitali sets}, are non-measurable by Exercise \ref{1}.
+    \end{remark*}
+
+    \begin{lemma*}[99\% Lemma for $\mu$]
+        For any measurable $A\subeq2^\N$, there exists a cylinder $[w]\subeq2^\N$ such that at-least $99\%$ of $[w]$ is covered by $A$, i.e. $\mu(A\cap[w])/\mu([w])\geq0.99$.
+    \end{lemma*}
+
+    \begin{exercise}
+        For each $n\in\N$, let $\sigma_n:2^\N\to2^\N$ be the \textit{$n^\textrm{th}$-bit flip} map, defined by flipping $x_n$ to $1-x_n$ and fixing all other coordinates. Let $G\coloneqq\gen{\sigma_n}_{n\in\N}\iso\bigoplus_n\Z/2\Z$, which naturally acts on $2^\N$.
+        \begin{enumerate}
+            \item Show that the orbit equivalence relation $\E_\phi$ is given by \textit{eventual equality} (denoted $\E_0$), where $x\E_0y$ iff there exists $N\in\N$ such that $x_n=y_n$ for all $n\geq N$.
+                \vspace{-0.05in}
+            \item Observe that $\phi$ is a pmp action (skip this, if you want, as it is just measure theory).
+                \vspace{-0.05in}
+            \item Use the 99\% Lemma for $\mu$ to show that $\phi$ is ergodic.
+        \end{enumerate}
+    \end{exercise}
+\end{document}

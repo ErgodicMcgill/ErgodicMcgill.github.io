@@ -1,0 +1,600 @@
+\documentclass[reqno, twoside]{article}
+\input{preamble.sty}
+\input{macros.sty}
+
+\begin{document}
+    \title{\textbf{\normalsize\MakeUppercase{Notes on Ergodic Theory}}}
+    \author{\footnotesize\MakeUppercase{Zhaoshen Zhai}}
+    \date{}
+    \maketitle
+    \freefootnote{\textit{Date}: \today.}
+
+    \begin{center}
+        \vspace{-0.3in}
+        \begin{minipage}{0.85\textwidth}\setstretch{0.8}
+            {\footnotesize{\textsc{Abstract.}} Notes on the Summer 2025 Reading Group on Ergodic Theory, following \cite{Tse22}, organized by Frédéric Kai, Ludovic Rivet, and Zhaoshen Zhai (\href{https://ergodicmcgill.github.io/}{website}).}
+        \end{minipage}
+    \end{center}
+
+    \tableofcontents\vspace{0.2in}
+
+    \section{Lecture 1 (Samy Lahlou): Crash course on Measure Theory, Part I}\label{sec:1}
+
+    Given a set $X$, our goal is to define a map $\mu:\pow(X)\to[0,\infty]$ that assigns to each subset $A\subeq X$ a \textit{measure} $\mu(A)\in[0,\infty]$ that `behaves like the volume of $A$'. This turns out to be impossible in full generality (and we shall see using ergodic-theoretic methods that this impossibility is for good reason; see Exercise \ref{exe:ergodic_non-measurable}), so we instead restrict to special subsets of $X$ with a nice algebraic (think: `constructible') structure.
+
+    {\vspace{-0.1in}\small\subsection*{Further reading}\cite[Lectures 1 to 5]{Tse23} and \cite[Chapter 1]{Fol99}.}
+
+    \begin{definition}\label{def:sigma_algebra}
+        Let $X$ be a set. A \textit{$\sigma$-algebra on $X$} is a collection $\mc{B}\subeq\pow(X)$ of subsets of $X$ containing $\e$ and is closed under complements and countable unions. More precisely:
+        \begin{enumerate}
+            \item (Non-trivial). $\e\in\mc{B}$.
+                \vspace{-0.05in}
+            \item (Closure under complements). For any $A\in\mc{B}$, we have $X\comp A\in\mc{B}$.
+                \vspace{-0.05in}
+            \item (Closure under countable unions). For any countable family $\l\{A_n\in\mc{B}\st n\in\N\r\}$, we have $\bigcup_nA_n\in\mc{B}$.
+        \end{enumerate}
+    \end{definition}
+
+    \begin{definition}
+        If $\mc{B}$ is a $\sigma$-algebra on a set $X$, the pair $(X,\mc{B})$ is said to be a \textit{measurable space}.
+    \end{definition}
+
+    A useful way to construct a $\sigma$-algebra is to start with an arbitrary family $\mc{C}\subeq\pow(X)$ and close\footnote{This `closure' operation can be made precise as follows. Starting with $\mc{C}_0\coloneqq\mc{C}$, throw in all the subsets of $X$ that is necessary to satisfy Definition \ref{def:sigma_algebra} relativized to $\mc{C}_0$ to obtain $\mc{C}_1$ (that is, let $\mc{C}_1$ contain $\e$ and such that if $A\in\mc{C}_0$, then $X\comp A\in\mc{C}_1$, and similarly for condition $3$). Then, let $\mc{C}_2$ be defined by throwing in all the countable unions and complements of sets in $\mc{C}_1$. Doing so infinitely-many times and taking the union $\bigcup_\alpha\mc{C}_\alpha$ will give us $\l\langle\mc{C}\r\rangle_\sigma$, but beware that this process must proceed into the transfinite up to $\alpha<\omega_1$, where $\omega_1$ is the first uncountable ordinal; ask your local set theorist why.} it under the above three conditions. Abstractly:
+    
+    \begin{definition}
+        The $\sigma$-algebra \textit{generated} by $\mc{C}\subeq\pow(X)$ is $\l\langle\mc{C}\r\rangle_\sigma\coloneqq\bigcap\{\mc{B}\st\mc{B}\supseteq\mc{C}\textrm{ is a }\sigma\textrm{-algebra on }X\}$.
+    \end{definition}
+
+    Note that $\l\langle\mc{C}\r\rangle_\sigma$ is indeed a $\sigma$-algebra on $X$ since the intersection of $\sigma$-algebras is again a $\sigma$-algebra.
+
+    \begin{definition}
+        Let $X$ be a topological space. The \textit{Borel $\sigma$-algebra} on $X$ is $\mc{B}(X)\coloneqq\l\langle\mc{T}\r\rangle_\sigma$, where $\mc{T}$ is the topology on $X$. The elements of $\mc{B}(X)$ are called the \textit{Borel sets} of $X$.
+    \end{definition}
+
+    Intuitively, for any topological space $X$, one would like to `measure' the Borel sets. This is justified since if one wants a measure compatible with the topology, then one must be able to measure the open sets, and hence also closed sets, countable unions of closed sets (called \textit{$F_\sigma$ sets}), countable intersections of open sets (called \textit{$G_\delta$ sets}), countable intersections of $F_\sigma$ sets, countable unions of $G_\delta$ sets, and so on\footnote{This goes up the \textit{Borel hierarchy}, studied in \textit{Descriptive Set Theory}; see \cite{Kec95}.}.
+
+    \begin{definition}
+        A \textit{measure} on a measurable space $(X,\mc{B})$ is a map $\mu:\mc{B}\to[0,\infty]$ such that $\mu(\e)=0$ and $\mu(\bigsqcup_{n\in\N}A_n)=\sum_{n\in\N}\mu(A_n)$ for any pairwise disjoint family $\l\{A_n\in\mc{B}\st n\in\N\r\}$.
+
+        The triple $(X,\mc{B},\mu)$ is then called a \textit{measure space}. A \textit{Borel measure} is a measure defined on some Borel $\sigma$-algebra.
+    \end{definition}
+
+    \begin{example}[Lebesgue]\label{exa:lebesgue}
+        Equip $\R$ with its usual topology. There is\footnote{We will not prove this fact, but it is an application of Carathéodory's Extension Theorem; see \cite[Lecture 4]{Tse23}.} a unique measure $\lambda:\mc{B}(\R)\to[0,\infty]$ on $\R$, called the \textit{Lebesgue measure}, such that $\lambda([a,b])=b-a$ for each $a\leq b$.
+    \end{example}
+
+    \begin{example}[Bernoulli]\label{exa:bernoulli}
+        Equip $2=\l\{0,1\r\}$ with the discrete topology and consider the product topology on $2^\N$. For each $p\in[0,1]$, is a unique measure $\mu_p:\mc{B}(2^\N)\to[0,\infty]$ on $2^\N$, called the \textit{Bernoulli $(p)$ measure}, such that for each word $w\in2^{<\N}$, we have $\mu_p([w])=p^{n_1}(1-p)^{n_0}$ where $n_i$ is the number of $i\in\l\{0,1\r\}$ in $w$ and $[w]$ is the set of all sequences in $2^\N$ containing $w$ as a prefix.
+    \end{example}
+
+    If $p=0$ (similarly if $p=1$), then $\mu_p(\xi)\in\l\{0,1\r\}$, and we have $\mu_p(\xi)=1$ iff $(p,p,p,\ldots)\in\xi$. Thus, all of the measure is concentrated at $(p,p,p,\ldots)$. Measures in which this occurs are called \textit{Dirac measures}.
+
+    \begin{example}[Dirac]
+        Let $X$ be a set and fix $x\in X$. The \textit{Dirac measure concentrated} at $x$ is the measure $\delta_x:\pow(X)\to\l\{0,1\r\}$ defined by $\delta_x(A)\coloneqq1$ iff $x\in A$, and $\delta_x(A)\coloneqq0$ iff $x\not\in A$.
+    \end{example}
+
+    \begin{definition}
+        A measure $\mu$ on $(X,\mc{B})$ is said to be \textit{finite} if $\mu(X)<\infty$, a \textit{probability measure} if $\mu(X)=1$, and \textit{$\sigma$-finite} if there is a partition $X=\bigsqcup_{n\in\N}X_n$ such that $X_n\in\mc{B}$ and $\mu(X_n)<\infty$ for all $n\in\N$.
+    \end{definition}
+
+    Unless otherwise stated, all measures are assumed to be $\sigma$-finite. In fact, we will usually only deal with probability measures, since we can also normalize a finite measure to a probability measure by $\mu\mapsto\mu/\mu(X)$.\\
+
+    Lastly, even though $\mu$ is only defined on the $\sigma$-algebra $\mc{B}$, we can slightly extend $\mu$ to a larger $\sigma$-algebra.
+
+    \begin{definition}
+        Let $(X,\mc{B},\mu)$ be a measure space. A subset $Z\subeq X$ is said to be \textit{$\mu$-null} if there exists some $Z'\in\mc{B}$ such that $Z\subeq Z'$ and $\mu(Z')=0$. We write $\Null_\mu$ for the set of all $\mu$-null subsets of $X$. A subset $A\subeq X$ is said to be \textit{$\mu$-conull} if $X\comp A$ is $\mu$-null.
+    \end{definition}
+
+    \begin{definition}
+        Let $(X,\mc{B},\mu)$ be a measure space. A subset $A\subeq X$ is \textit{$\mu$-measurable}\footnote{Very confusing terminology. One might think that elements of $\mc{B}$ are the `measurable' ones, but this removes $\mu$ from the picture. In general, there are much more $\mu$-measurable sets that there are sets in $\mc{B}$. Indeed, there are $2^{\aleph_0}$-many Borel sets on $\R$, but there are $2^{2^{\aleph_0}}$-many $\lambda$-measurable sets!} if there exists some $B\in\mc{B}$ and some $\mu$-null set $Z$ such that $A=B\cup Z$. We write $\Meas_\mu$ for the set of all $\mu$-measurable sets.
+    \end{definition}
+
+    It is an exercise that $\Meas_\mu=\l\langle\mc{B}\cup\Null_\mu\r\rangle_\sigma$. Moreover, $\mu$ admits a unique extension to a map $\bar{\mu}:\Meas_\mu\to[0,\infty]$, called the \textit{completion} of $\mu$, and this measure satisfies $\Meas_{\bar{\mu}}=\Meas_\mu$. \textsc{Hint}: $\bar{\mu}(B\cup Z)\coloneqq\mu(B)$.
+
+    \begin{definition}
+        A measure $\mu$ is \textit{complete} if $\bar{\mu}=\mu$.
+    \end{definition}
+
+    For convenience, we will always assume that measures are complete. Neither measures $\lambda$ nor $\mu_p$ in Examples \ref{exa:lebesgue} and \ref{exa:bernoulli} are complete, so we tacitly extend them. \\
+
+    We end with some easy exercises on measures; please read/prove them, as they will be used freely in the future; they are roughly ranked by difficulty. Throughout, let $(X,\mc{B},\mu)$ be a measure space and let $A_n\in\mc{B}$.
+
+    \begin{exercise}[Monotonicity]
+        If $A_1\subeq A_2$, then $\mu(A_1)\leq\mu(A_2)$.
+    \end{exercise}
+
+    Deduce that if $\mu$ is finite, then $\mu$ is a bounded function. (Are $\sigma$-finite measures bounded?)
+
+    \begin{exercise}[Inclusion-exclusion]
+        For any $A_1,A_2\in\mc{B}$, we have $\mu(A_1\cup A_2)+\mu(A_1\cap A_2)=\mu(A_1)+\mu(A_2)$.
+    \end{exercise}
+
+    \begin{exercise}[Continuity $\incto$]
+        If $(A_n)_{n\in\N}$ is increasing, then $\mu(\bigcup_{n\in\N}A_n)=\lim_n\mu(A_n)$.
+    \end{exercise}
+
+    \begin{exercise}[Continuity $\decto$]
+        If $(A_n)_{n\in\N}$ is decreasing and $\mu(A_1)<\infty$, then $\mu(\bigcap_{n\in\N}A_n)=\lim_n\mu(A_n)$.
+    \end{exercise}
+
+    \begin{exercise}
+        Show that $\lambda(\Q)=0$. \textsc{Hint:} What is the Lebesgue measure of singletons?
+    \end{exercise}
+
+    Let $P$ be a property of some points in $X$. We say that $P$ \textit{holds $\mu$-almost everywhere} (or \textit{$\mu$-almost surely}) if $\l\{x\in X\st x\textrm{ satisfies }P\r\}$ is $\mu$-conull.
+
+    \begin{exercise}[Borel-Cantelli Lemmas]
+        Let $(A_n)_{n\in\N}$ be a sequence of $\mu$-measurable sets.
+        \begin{enumerate}
+            \item If $\sum_{n\in\N}\mu(A_n)<\infty$, then $\mu$-almost every $x\in X$ lives in at-most finitely-many $A_n$.
+                \vspace{-0.05in}
+            \item (Measure Compactness). If $\mu(X)<\infty$ and there exists $\epsilon>0$ such that $\mu(A_n)\geq\epsilon$ for all $n\in\N$, then at least an $\epsilon$-measure set of $x\in X$ lives in infinitely-many $A_n$'s.
+        \end{enumerate}
+    \end{exercise}
+
+    For measurable spaces $(X_1,\mc{B}_1)$ and $(X_2,\mc{B}_2)$, define $\mc{B}_1\otimes\mc{B}_2\coloneqq\l\langle B_1\times B_2\st B_i\in\mc{B}_i\r\rangle_\sigma$.
+
+    \begin{exercise}
+         Show that if $X_i$ are second-countable topological spaces, then $\mc{B}(X_1\times X_2)=\mc{B}(X_1)\otimes\mc{B}(X_2)$.
+     \end{exercise}
+
+    \begin{exercise}
+        Let $X$ be a topological space. A \textit{Cantor set} is a subset $C\subeq X$ homeomorphic to $2^\N$.
+        \begin{enumerate}
+            \item Show that the `middle-thirds Cantor set' $C\subeq[0,1]$ is a Cantor set as in the above definition. Moreover, show that $\lambda(C)=0$. \textsc{Hint:} Recall the construction $C=\bigcap_{n\in\N}C_n$ and use continuity.
+                \vspace{-0.05in}
+            \item Define a Cantor set $C\subeq[0,1]$ with positive Lebesgue measure. \textsc{Hint:} fatten the standard construction.
+        \end{enumerate}
+    \end{exercise}
+
+    A measurable set $A\subeq X$ is said to be an \textit{atom} if there is no subset $B\subeq A$ with $0<\mu(B)<\mu(A)$. For example, singletons $\l\{x\r\}$ are atoms under the Dirac measure $\delta_x$. More generally:
+
+    \begin{exercise}[Atomic Decomposition]
+        If $(X,\mc{B},\mu)$ is a $\sigma$-finite measure space, $\mc{B}$ is \textit{countably generated} (i.e., $\mc{B}=\l\langle\mc{B}_0\r\rangle$ for some countable $\mc{B}_0\subeq\pow(X)$), and \textit{separates points} (i.e., if $x\neq y$, then there exists $B\in\mc{B}$ such that $x\in B\not\ni y$.), then every atom $A\in\mc{B}$ is a singleton. Moreover, if $\l\{x_\alpha\r\}$ are all the atoms (how many can there be?), then $\mu=\mu_0+\sum_\alpha a_\alpha\delta_{x_\alpha}$ for some atomless measure $\mu_0$ and some $a_\alpha\geq0$.
+    \end{exercise}
+
+    \section{Lecture 2 (Samy Lahlou): Crash course on Measure Theory, Part II}\label{sec:2}
+
+    Let $(X,\mc{B},\mu)$ be a measure space. Our goal is to define the \textit{Lebesgue integral} $\int f\,\d\mu$ for a function $f:X\to\R$. Again, this is not possible in full generality, so we restrict ourselves to the so-called \textit{measurable functions}.
+
+    {\vspace{-0.1in}\small\subsection*{Further reading}\cite[Lectures 9 to 13, 17 to 21]{Tse23} and \cite[Chapters 2 and 3]{Fol99}.}
+
+    \begin{definition}
+        A \textit{simple function} is an $\R$-linear combination of characteristic functions on $\mu$-measurable sets, i.e., if $(E_i)_{i\leq n}$ is a collection of pairwise-disjoint $\mu$-measurable sets and $(a_i)_{i\leq n}$ are distinct reals, then $\phi\coloneqq\sum_{i\leq n}a_i\chi_{E_i}$ is a said to be a \textit{simple function}. Define its \textit{(Lebesgue) integral} as $\int\phi\,\d\mu\coloneqq\sum_{i\leq n}a_i\mu(E_i)$.
+    \end{definition}
+
+    For a (bounded) positive function $f:X\to\R_{\geq0}$, we might define $\int f\,\d\mu$ by approximating $f$ by simple functions from below, say by an increasing sequence $(\phi_n)$ of simple functions such that $f=\lim_n\phi_n$ uniformly. However, not all functions $f$ admit such an approximation.
+
+    To see this, let us attempt to construct such a sequence $(\phi_n)$. For each $n$, we will approximate the cutoff of $f$ at $2^n$, i.e., the function $\min(f,2^n)$. We do so by partitioning the codomain $[0,2^n]$ into intervals of length $2^{-n}$, for a total of $k_n\coloneqq2^n/2^{-n}=2^{2n}$ intervals. Set $E_k\coloneqq f^{-1}([2^{-n}k,\infty))$ for each $k\in\l\{1,\dots,k_n\r\}$, and let $\phi_n\coloneqq\sum_{k\leq k_n}2^{-n}\chi_{E_k}$. One easily checks that $f=\lim_n\phi_n$ uniformly.
+
+    However, $E_k$ is not guaranteed to be $\mu$-measurable! To fix this, we simply define the issue away.
+
+    \begin{definition}
+        A function $f:X\to Y$ between measurable spaces $(X,\mc{B})$ and $(Y,\mc{C})$ be measurable spaces is said to be \textit{$(\mc{B},\mc{C})$-measurable} if $f^{-1}(C)\in\mc{B}$ for all $C\in\mc{C}$.
+
+        A function $f:X\to Y$ between topological spaces is said to be \textit{Borel} if it is $(\mc{B}(X),\mc{B}(Y))$-measurable. A \textit{Borel isomorphism} is a bijection $f:X\to Y$ such that both $f$ and $f^{-1}$ are Borel.
+    \end{definition}
+
+    \begin{exercise}
+        Continuous maps are Borel. \textsc{Hint:} Define a $\sigma$-algebra containing open sets in the codomain.
+    \end{exercise}
+
+    So far we only dealt with measurable spaces. Let us now bring a measure into the picture.
+
+    \begin{definition}
+        Let $(X,\mu)$\footnote{Whenever the $\sigma$-algebra is not stated, we assume that $\mu$ is defined on $\Meas_\mu$. In particular, we assume that $\mu$ is complete.} be a measure space and $Y$ be a topological space. A function $f:X\to Y$ is said to be \textit{$\mu$-measurable} if it is $(\Meas_\mu,\mc{B}(Y))$-measurable.
+    \end{definition}
+
+    \begin{remark}
+        Compositions of $\mu$-measurable functions \textit{need not} be $\mu$-measurable.
+    \end{remark}
+
+    The following exercise is one of the main reasons why $\mu$-measurable functions are introduced, and ultimately also why the Lebesgue integral is superior compared to the Riemann integral.
+
+    \begin{exercise}
+        In separable metric spaces, pointwise limits of $\mu$-measurable functions are $\mu$-measurable, i.e., if $(f_n)$ is a sequence of $\mu$-measurable maps $f_n:X\to Y$ from a measure space $(X,\mu)$ to a separable space $Y$, and $f\coloneqq\lim_nf_n$ (pointwise), then $f:X\to Y$ is $\mu$-measurable.
+
+        \textsc{Hint:} Let $\mc{C}\coloneqq\{B\in\mc{B}(Y)\st f^{-1}(B)\in\Meas_\mu\}$. Show that $\mc{C}$ is a $\sigma$-algebra containing all open set in $Y$, so $\mc{C}=\mc{B}(Y)$, as desired. For each $U\subeq Y$ open, use separability to write $U=\bigcup_{n\in\N}B_n$, where each $B_n$ is a ball whose closure is contained in $U$, and show that $f^{-1}(U)\in\Meas_\mu$.
+    \end{exercise}
+
+    \begin{exercise}
+        If $f_1,f_2:(X,\mu)\to\R$ are $\mu$-measurable and $g:\R^2\to\R$ is Borel, then $g(f_1,f_2):X\to\R$ is also $\mu$-measurable. In particular, $f_1+f_2$ and $f_1\cdot f_2$ are $\mu$-measurable.
+    \end{exercise}
+
+    \begin{exercise}
+        If $(f_n)$ is a sequence of $\mu$-measurable functions $f_n:X\to\bar{\R}$, then $\sup_nf_n$, $\inf_nf_n$, $\limsup_nf_n$, and $\liminf_nf_n$ are also $\mu$-measurable.
+    \end{exercise}
+
+    \begin{notation}
+        We write $L(X,\mu)$ for the set of all $\mu$-measurable functions $f:(X,\mu)\to\bar{\R}$, and $L^+(X,\mu)$ for those which are non-negative.
+    \end{notation}
+
+    We are finally ready to define the Lebesgue integral.
+
+    \begin{definition}
+        Let $(X,\mu)$ be a measure space. The \textit{(Lebesgue) integral} of $f\in L^+(X,\mu)$ is
+        \vspace{-0.05in}
+        \begin{equation*}
+            \int f\,\d\mu\coloneqq\sup\l\{\int\phi\,\d\mu\st0\leq\phi\leq f\textrm{ simple function}\r\}.
+            \vspace{-0.05in}
+        \end{equation*}
+        In general, if $f\in L(X,\mu)$, we decompose $f=f^+-f^-$ where $f^+\coloneqq\max\l\{f,0\r\}$ and $f^-\coloneqq\max\l\{-f,0\r\}$. The \textit{(Lebesgue) integral} of $f$ is $\int f\,\d\mu\coloneqq\int f^+\,\d\mu-\int f^-\d\mu$, provided that one of the terms is finite.
+    \end{definition}
+
+    If $\int f\,\d\mu<\infty$, we say that $f$ is \textit{$\mu$-integrable}, in which case we write $f\in L^1(X,\mu)$. More generally,
+
+    \begin{definition}
+        Take $p\in[1,\infty]$ and let $L^p(X,\mu)$ be the set of all $\mu$-measurable functions $f:X\to\bar{\R}$ such that $\l\|f\r\|_p<\infty$, where $\l\|f\r\|_p\coloneqq(\int|f|^p\,\d\mu)^{1/p}$ if $p<\infty$ and $\l\|f\r\|_\infty\coloneqq\esssup|f|\coloneqq\inf\l\{c\geq0\st|f|\leq c\textrm{ $\mu$-a.e.}\r\}$.
+    \end{definition}
+
+    \begin{exercise}
+        Let $f,g\in L^p(X,\mu)$. If $f\leq g$, then $\l\|f\r\|_p\leq\l\|g\r\|_p$.
+    \end{exercise}
+
+    Since a $\mu$-measurable function $f:X\to\bar{\R}$ can be approximated from below by simple functions $(\phi_n)$, we should be able to calculate $\int f\,\d\mu$ as the limit of $\int\phi_n\,\d\mu$. Indeed,
+
+    \begin{theorem}[Monotone Convergence Theorem]
+        If $(f_n)\in L^+(X,\mu)$ and $f_n\incto f$, then $\int f_n\,\d\mu\incto\int f\,\d\mu$.
+    \end{theorem}
+
+    \begin{corollary}
+        If $(f_n)\in L^+(X,\mu)$, then $\sum_n\int f_n\,\d\mu=\int\sum_nf_n\,\d\mu$.
+    \end{corollary}
+
+    \begin{exercise}
+        For any $f,g\in L^1(X,\mu)$ and $a,b\in\R$, we have $\int(af+bg)\,\d\mu=a\int f\,\d\mu+b\int g\,\d\mu$.
+
+        \textsc{Hint:} Simple $\rightsquigarrow_\textrm{MCT}$ $L^+$ $\rightsquigarrow$ $L^1$.
+    \end{exercise}
+
+    \begin{exercise}
+        Let $f,g\in L^1(X,\mu)$. If $f=g$ $\mu$-a.e., then $\int f\,\d\mu=\int g\,\d\mu$. \textsc{Hint:} Consider $\int(f-g)\,\d\mu$.
+    \end{exercise}
+
+    We list two more convergence theorems that will be useful later on.
+
+    \begin{theorem}[Fatou's Lemma]
+        If $(f_n)\in L^+(X,\mu)$, then $\int\liminf_nf_n\,\d\mu\leq\liminf_n\int f_n\d\mu$.
+    \end{theorem}
+
+    \begin{theorem}[Dominated Convergence Theorem]
+        Let $(f_n)\in L^1(X,\mu)$. If $f_n\to f$ $\mu$-a.e. and $|f_n|\leq g$ for some $g\in L^1(X,\mu)$, then $\lim_n\int f_n\,\d\mu=\int f\,\d\mu$.
+    \end{theorem}
+
+    Let us now discuss differentiation of functions $f:X\to\R$; for convenience, we assume\footnote{Otherwise, we will need to discuss `signed measures'.} that $f\in L^+(X,\mu)$. For these functions, we can define a new measure $\nu$ on $\mc{B}$ by $\nu(B)\coloneqq\int_Bf\,\d\mu\coloneqq\int f\cdot\chi_B\,\d\mu$, which measures the `area under the curve'. Note that for each $B\in\mc{B}$, we have $B$ is $\nu$-null whenever $B$ is $\mu$-null.
+
+    It turns out that the `correct' setting to discuss differentiation is between two measures $\mu$ and $\nu$ which satisfy the above condition.
+
+    \begin{definition}
+        If $\mu,\nu$ are measures on a measurable space $(X,\mc{B})$ and $B$ is $\nu$-null whenever $B$ is $\mu$-null for each $B\in\mc{B}$, we say that $\nu$ is \textit{absolutely continuous w.r.t $\mu$}, and write $\nu\abscont\mu$.
+    \end{definition}
+
+    \begin{theorem}[Lebesgue-Radon-Nikodym Theorem]
+        If $\nu\abscont\mu$ are $\sigma$-finite measures on a measurable space $(X,\mc{B})$, then there exists a $\mc{B}$-measurable map $f:X\to\R_{\geq0}$ such that $\nu(B)=\int_Bf\,\d\mu$ for all $B\in\mc{B}$.
+    \end{theorem}
+
+    Such a function $f:X\to\R_{\geq0}$ is unique $\mu$-a.e., and is called the \textit{Radon-Nikodym derivative of $\nu$ w.r.t. $\mu$}, denoted $\frac{\d\nu}{\d\mu}$. Thus, we have $\nu(B)=\int_B\frac{\d\nu}{\d\mu}\d\mu$ for all $B\in\mc{B}$.
+
+    \begin{corollary}
+        In the above setting, we have $\int g\,\d\mu=\int g\frac{\d\mu}{\d\nu}\d\nu$ for all $g\in L^1(X,\mu)$.
+    \end{corollary}
+
+    To relate $\d\nu/\d\mu$ to derivatives in calculus (say on $\R^n$), we let $\mu\coloneqq\lambda$ be Lebesgue measure on $\R^n$.
+
+    \begin{theorem}[Lebesgue Differentiation Theorem]
+        For any locally-integrable function $f:\R^n\to\R$ (i.e. if $f\cdot\chi_K\in L^1(\R^n,\lambda)$ for every compact $K\subeq\R^n$) and for $\lambda$-a.e. $x\in\R^n$, we have
+        \vspace{-0.05in}
+        \begin{equation*}
+            f(x)=\lim_{\epsilon\to0}\frac{1}{\lambda(B_\epsilon(x))}\int_{B_\epsilon(x)}f\,\d\lambda.
+            \vspace{-0.05in}
+        \end{equation*}
+    \end{theorem}
+
+    \begin{corollary}
+        For any locally-finite Borel measure $\mu\abscont\lambda$ on $\R^n$ and for $\lambda$-a.e. $x\in\R^n$, we have
+        \vspace{-0.05in}
+        \begin{equation*}
+            \frac{\d\mu}{\d\lambda}(x)=\lim_{\epsilon\to0}\frac{\mu(B_\epsilon(x))}{\lambda(B_\epsilon(x))}.
+            \vspace{-0.05in}
+        \end{equation*}
+    \end{corollary}
+
+    We end by briefly mentioning the `Isomorphism Theorems'. These justify why we only gave three examples in Lecture \ref{sec:1}, and allows us to work in concrete spaces like $[0,1]$ or $2^\N$.
+
+    \begin{definition}
+        A measurable space $(X,\mc{B})$ is said to be \textit{standard Borel} if $\mc{B}$ is the Borel $\sigma$-algebra of some Polish (i.e. separable and completely metrizable) topology on $X$.
+
+        A probability space $(X,\mc{B},\mu)$ is \textit{standard} if $(X,\mc{B})$ is standard Borel.
+    \end{definition}
+
+    \begin{theorem}[Borel Isomorphism Theorem]\label{thm:borel_isomorphism_theorem}
+        Any two uncountable standard Borel spaces are Borel isomorphic. In particular, they all have cardinality continuum and are Borel isomorphic to $2^\N$.
+    \end{theorem}
+
+    \begin{definition}
+        Let $(X,\mc{B})$ and $(Y,\mc{C})$ be measurable spaces. If $f:X\to Y$ is $(\mc{B},\mc{C})$-measurable and $\mu$ is a measure on $\mc{B}$, the \textit{pushforward measure of $\mu$ by $f$} is the measure $f_\ast\mu$ on $\mc{C}$ defined by $f_\ast\mu(C)\coloneqq\mu(f^{-1}(C))$.
+    \end{definition}
+
+    \begin{definition}
+        Two measure spaces $(X,\mc{B},\mu)$ and $(Y,\mc{C},\nu)$ are said to be a \textit{measure isomorphic} if there is a \textit{measure-preserving transformation} $f:X\to Y$, i.e., a map $f:X\to Y$ such that $f_\ast\mu=\nu$, and such that there is a $\mu$-conull set $X_0\subeq X$ and a $\nu$-conull set $Y_0\subeq Y$ on which $f$ and $f^{-1}$ restrict to Borel isomorphisms.
+    \end{definition}
+
+    \begin{theorem}[Measure Isomorphism Theorem]\label{thm:measure_isomorphism_theorem}
+        Any two atomless standard probability spaces are measure isomorphic. In particular, they are all measure isomorphic to $([0,1],\lambda)$.
+    \end{theorem}
+
+    \section{Lecture 3 (Peng Bo): An introduction to Ergodic Theory}\label{sec:3}
+
+    Generally speaking, a \textit{dynamical system} is just a group action. For instance, actions of $\Z$ (resp. $\R$) on some space $X$ lead to \textit{discrete} (resp. \textit{continuous}) dynamical systems, and different actions on different spaces are studied from different point of views:
+    \begin{enumerate}
+        \item Continuous actions on topological spaces lead to \textit{topological dynamics}.
+            \vspace{-0.05in}
+        \item Measure preserving actions on measure spaces and lead to \textit{measured group theory} and \textit{ergodic theory}.
+            \vspace{-0.05in}
+        \item Geometric (proper and cocompact) actions on geodesic metric spaces lead to \textit{geometric group theory}.
+            \vspace{-0.05in}
+        \item Linear actions on Banach spaces (or TVSs) lead to \textit{functional analysis} and \textit{$C^\ast$-algebras}.
+    \end{enumerate}
+
+    Here, we will be interested in measure preserving actions on measure spaces. To motivate these actions, we will also mention the theory of continuous actions on topological spaces, which was the original motivation for von-Neumann to introduce measure preserving actions in the first place. For simplicity, we will focus on actions of $\Z$ (so it suffices to provide a single generator) on compact (resp. probability) spaces.
+
+    \begin{definition}
+        A \textit{topological dynamical system} is a pair $(X,f)$, consisting of a compact topological space $X$ and a homeomorphism $f:X\to X$.
+    \end{definition}
+
+    \begin{definition}
+        A \textit{measure-preserving dynamical system} is a tuple $(X,\mu,T)$ consisting of a standard probability space $(X,\mu)$ and a measure-preserving transformation $T\in\MPT(X,\mu)$.
+    \end{definition}
+
+    \begin{definition}
+        A topological system $(X,f)$ is \textit{minimal} if there is no proper subsystem, i.e. if there is no $f$-invariant compact subspace $Y\subeq X$.
+    \end{definition}
+
+    \begin{exercise}
+        A topological system $(X,f)$ is minimal if every $f$-orbit in $X$ is dense. \textsc{Hint:} If $\l\{f^n(x)\r\}_{n\in\Z}$ is not dense, then its closure is a proper subsystem.
+    \end{exercise}
+
+    The measure-theoretic analogue of minimal system is an \textit{ergodic} system. As we shall see, these are much more amenable than their topological-counterparts.
+
+    \begin{definition}
+        A measure-preserving system $(X,\mu,T)$ is \textit{ergodic} if every $T$-invariant Borel subset is either $\mu$-null or $\mu$-conull.
+    \end{definition}
+
+    \begin{example}
+        Consider the circle $S^1\coloneqq\R/\Z\iso[0,1)$ and an irrational angle $\theta\in[0,1)$. Then the \textit{(irrational) rotation} $R_\alpha:S^1\to S^1$ given by $x\mapsto x+\theta$ is both minimal and ergodic.
+
+        We will show that $R_\alpha$ is ergodic in Proposition \ref{prp:irrational_rotation_ergodic}. To see that $R_\alpha$ is minimal, it suffices to show that the orbit $\l\{n\theta\r\}_{n\in\Z}$ approaches $0$. Indeed, there exists some $n\in\Z$ such that $[n\theta,(n+1)\theta]$ contains $0$ in the quotient. Without loss of generality, we can assume that $d(0,(n+1)\theta)\leq d(0,n\theta)$, so $\theta_1\coloneqq(n+1)\theta\leq\theta/2$ in the quotient and is in the orbit of $\theta$. Replacing $\theta$ by $\theta_1$ and repeating furnishes a sequence $\theta_n\to0$.
+    \end{example}
+
+    In contrast to the above example, every homeomorphism on $S^2$ has a fixed point by Brower's fixed point theorem. Thus, there is no minimal system on $S^2$. More generally, there is no minimal system in $S^{2n}$.
+
+    \begin{open}
+        Characterize all manifolds supporting a minimal system. \textsc{Remark:} Negative results include the unit interval and $S^{2n}$. This question is still open, even in dimension three.
+    \end{open}
+
+    Of course, any such characterization is modulo the isomorphism relation.
+
+    \begin{definition}
+        Two topological dynamical systems $(X,f)$ and $(Y,g)$ are \textit{isomorphic} if there exists a homeomorphism $h:X\to Y$ such that $g=h\circ f\circ h^{-1}$.
+    \end{definition}
+
+    The Measure Isomorphism Theorem (Theorem \ref{thm:measure_isomorphism_theorem}) asserts that any two atomless standard probability spaces are measure isomorphic. This allows us to reduce the classification of (atomless) measure-preserving dynamical systems to just measure-preserving transformations.
+
+    \begin{open}
+        Classify ergodic measure-preserving transformations up to isomorphism.
+    \end{open}
+
+    Here is a celebrated positive result.
+
+    \begin{definition}
+        A \textit{Bernoulli shift} is a measure-preserving dynamical system $(\Sigma^\Z,\pi^\Z,S)$ where $\Sigma$ is a finite set, $\pi$ is a probability measure on $\Sigma$, and $S$ is the \textit{left-shift} map $S(x)(n)\coloneqq x(n+1)$.
+
+        The \textit{entropy} of a Bernoulli shift is $-\sum_{i\leq|\Sigma|}\pi(i)\log(\pi(i))$.
+    \end{definition}
+
+    \begin{theorem}[Ornstein]
+        Two Bernoulli shifts are isomorphic iff their entropies coincide.
+    \end{theorem}
+
+    Lastly, we end with a recurrence question: given a $\mu$-measurable subset $U\subeq X$ and a point $x\in X$, how many points in the orbit of $x$ are in $U$?
+
+    \begin{theorem}[Birkhoff's Pointwise Ergodic Theorem; Theorem \ref{thm:pointwise_ergodic_theorem}]
+        Let $(X,\mu,T)$ be an ergodic system and let $U\subeq X$ be a $\mu$-measurable subset. Then $\lim_n|\{i<n\st T^ix\in U\}|/n=\mu(U)$ for $\mu$-a.e. $x\in X$.
+    \end{theorem}
+
+    \section{Lecture 4 (Zhaoshen Zhai): Examples of Ergodic Transformations}\label{sec:4}
+
+    Following Lecture \ref{sec:3}, we begin by studying actions of $\N$ on a standard probability space $(X,\mu)$, which is generated by a (probability) measure-preserving transformation $T:X\to X$, called a \textit{pmp transformation}.
+
+    Throughout, let $(X,\mu)$ be a standard probability space and let $T:X\to X$ be a pmp transformation.
+
+    {\vspace{-0.1in}\small\subsection*{Further reading}\cite[Lectures 1 to 4]{Tse22}.}
+
+    \begin{definition}
+        The \textit{orbit equivalence relation} of $T$ is the equivalence relation $\E_T\subeq X^2$ defined by $x\E_Ty$ iff $T^n(x)=T^m(y)$ for some $n,m\in\N$. The \textit{forward orbit} of a point $x\in X$ is the set $\l\{T^n(x)\r\}_{n\in\N}$.
+    \end{definition}
+
+    \begin{definition}
+        Let $E$ be an equivalence relation on a set $X$.
+        \begin{enumerate}
+            \item A subset $A\subeq X$ is \textit{$E$-invariant} if $A$ is a union of $E$-classes. The \textit{$E$-saturation} of $A$ is $[A]_E\coloneqq\bigcup_{x\in A}[x]_E$, which is clearly $\E$-invariant, and $A$ is $E$-invariant iff $A=[A]_E$.
+                \vspace{-0.05in}
+            \item A function $f:X\to Y$ is \textit{$E$-invariant} if $f$ is constant on each $E$-class.
+        \end{enumerate}
+        We say that $A$ (or $f$) is \textit{$T$-invariant} if it is $\E_T$-invariant.
+    \end{definition}
+
+    \begin{remark}
+        Note that $A\subeq X$ is $T$-invariant iff $T^{-1}(A)=A$, and $f:X\to Y$ is $T$-invariant iff $f\circ T=f$.
+    \end{remark}
+
+    Observe that $[A]_{\E_T}=\bigcup_{n,m\in\Z}T^{-n}(T^m(A))$, so $[A]_{\E_T}$ is not \textit{a priori} measurable. It turns out that $[A]_{\E_T}$ is measurable by a theorem of Descriptive Set Theory (which one?), but we can avoid it with the following theorem, which is of independent interest.
+
+    \begin{theorem}[Poincaré Recurrence]\label{thm:poincare_recurrence}
+        Every measurable set $A\subeq X$ is $a.e.$-forward recurrent, i.e., for a.e. $x\in X$, we have $T^n(x)\in A$ for some $n\geq1$.
+    \end{theorem}
+    \begin{proof}
+        Let $W\coloneqq\bigcap_{n\geq1}\l\{x\in A\st T^n(x)\not\in A\r\}$, which is clearly measurable. Note that $W\cap T^{-n}(W)=\e$ for each $n\geq1$, so the family $\l\{T^{-n}(W)\r\}_{n\in\N}$ is pairwise-disjoint, and hence $W$ is \textit{wandering}:
+        \begin{center}
+            \begin{minipage}{0.95\textwidth}
+                \begin{definition}
+                    A set $W\subeq X$ is \textit{$T$-wandering} if the family $\l\{T^{-n}(W)\r\}_{n\in\N}$ is pairwise-disjoint.
+                \end{definition}
+                \begin{lemma}
+                    Every measurable wandering set $T$ is null.
+                \end{lemma}
+                \begin{proof}
+                    $\sum_n\mu(W)=\sum_n\mu(T^{-n}(W))=\mu(\bigsqcup_nT^{-n}(W))\leq\mu(X)<\infty$, so $\mu(W)=0$.\qedlem
+                \end{proof}
+            \end{minipage}
+        \end{center}
+        Set $Z\coloneqq\bigcup_nT^{-n}(W)$, which is still null, and note that $A_0\coloneqq A\comp Z=_\mu A$ is forward recurrent.
+    \end{proof}
+
+    \begin{corollary}\label{cor:saturation_almost_measurable}
+        For all measurable sets $A\subeq X$, there exists $A_0=_\mu A$ such that $[A_0]_{\E_T}=\bigcup_nT^{-n}(A_0)$.
+    \end{corollary}
+
+    \begin{definition}
+        An equivalence relation $E\subeq X^2$ on $(X,\mu)$ is \textit{ergodic} if every $E$-invariant measurable set $A\subeq X$ is either null or conull. A pmp $T:X\to X$ is \textit{ergodic} if $\E_T$ is ergodic.
+    \end{definition}
+
+    \begin{proposition}\label{prp:irrational_rotation_ergodic}
+        The irrational rotation $R_\alpha:S^1\to S^1$ is ergodic w.r.t. the Lebesgue measure on $S^1$.
+    \end{proposition}
+    \begin{proof}
+        We will need the following lemma.
+        \begin{center}
+            \begin{minipage}{0.95\textwidth}
+                \begin{lemma}[99\% Lemma for $\lambda$]\label{99_lebesgue}
+                    For any $A\subeq[0,1)$ with positive Lebesgue measure, there is an interval $I\subeq[0,1)$ such that at-least $99\%$ of $I$ is covered by $A$, i.e., $\lambda(A\cap I)/\lambda(I)\geq0.99$.
+                \end{lemma}
+                \begin{proof}
+                    Fix $\epsilon>0$ and (by outer regularity of $\lambda$) let $U\subeq[0,1)$ be open such that $\lambda(U)/\lambda(A)\geq1-\epsilon$. Write $U=\bigsqcup_{n\in\N}I_n$ for disjoint open intervals $I_n\subeq[0,1)$, and observe that
+                    \vspace{-0.05in}
+                    \begin{equation*}
+                        \frac{\lambda(A)}{\lambda(U)}=\frac{1}{\lambda(U)}\sum_{n\in\N}\lambda(A\cap I_n)=\sum_{n\in\N}\frac{\lambda(I_n)}{\lambda(U)}\frac{\lambda(A\cap I_n)}{\lambda(I_n)}\geq1-\epsilon.
+                        \vspace{-0.05in}
+                    \end{equation*}
+                    Hence a convex combination of $\l\{\lambda(A\cap I_n)/\lambda(I_n)\r\}_n$ is at-least $1-\epsilon$, so the result follows. \qedlem
+                \end{proof}
+            \end{minipage}
+        \end{center}
+        Now, suppose towards a contradiction that $R_\alpha$ is not ergodic, so there exists an $R_\alpha$-invariant measurable $A\subeq[0,1)$ such that both $A$ and $A^c$ have positive $\lambda$-measure. By the $99\%$ Lemma, let $I\subeq[0,1)$ (resp. $J$) be an interval such that $99\%$ of $I$ is covered by $A$ (resp. $A^c$); without loss of generality, suppose that $|J|\leq|I|$.
+
+        By $R_\alpha$-invariance, $99\%$ of any translate of $J$ is still covered by $A^c$, and so it suffices to cover at-least half of $I$ by translates of $J$, for then $99\%/2>1\%$ of $I$ is covered by $A^c$, a contradiction. This can be done by minimality of $R_\alpha$ (i.e., density of any $R_\alpha$-orbit), since we can translate the left-endpoint of $J$ arbitrarily close to the right-endpoint of previous translates of $J$.
+    \end{proof}
+
+    Here is a cute application of the ergodicity of $R_\alpha$. For any map $f:X\to X$, its \textit{graph} is the set $G_f\subeq X^2$ of pairs $(x,f(x))$. We can view $G_f$ as an abstract graph with vertex set $X$ and with edges $(x,f(x))$.
+
+    What is the chromatic number of $G_{R_\alpha}$, for $\alpha$ irrational? Since $R_\alpha$ is not periodic, each equivalence class is a $\Z$-line $\l\{R_\alpha^n(x)\r\}_{n\in\Z}$, and $G_{R_\alpha}$ is the disjoint union of continuum-many such $\Z$-lines. Using the Axiom of Choice, we can pick a point in each $\Z$-line, so we can $2$-color $G_{R_\alpha}$ by coloring said points blue and alternating.
+
+    Note that a (finite) coloring of a graph $G$ is just a map $c:G\to n$ for some $n\in\N$ such that if $(x,y)\in G$, then $c(x)\neq c(y)$. Thus we can ask for the \textit{measurable chromatic number} of $G$: what is the minimal $n\in\N$ such that there is a measurable colouring $c:G\to n$? Clearly, $G_{R_\alpha}$ is measurably $3$-colourable.
+
+    \begin{corollary}
+        The graph $G_{R_\alpha}\subeq X^2$ is not measurably $2$-colourable.
+    \end{corollary}
+    \begin{proof}
+        If it is, then there is a measurable colour $A\subeq X$ of $G_{R_\alpha}$ such that $R_\alpha(A)=A^c$, so $\lambda(A)=\lambda(A^c)=1/2$. Then $R_{2\alpha}(A)=R_\alpha^2(A)=A$, so $A$ is a measurable $R_{2\alpha}$-invariant set. Since $2\alpha$ is irrational, we see that $R_{2\alpha}$ is ergodic, and hence $\mu(A)\in\l\{0,1\r\}$, a contradiction.
+    \end{proof}
+
+    \begin{proposition}\label{prp:shift_ergodic}
+        The Bernoulli shift $T:2^\N\to2^\N$ is ergodic w.r.t. the Bernoulli$(1/2)$ measure $\mu$ on $2^\N$.
+    \end{proposition}
+    \begin{proof}
+        We will prove a stronger result, which implies that $T$ is ergodic.
+        \begin{center}
+            \begin{minipage}{0.95\textwidth}
+                \begin{definition}
+                    A pmp $T:X\to X$ is said to be \textit{mixing} if for any measurable $A,B\subeq X$, we have $\mu(A\cap T^{-n}B)\rightarrow\mu(A)\mu(B)$ as $n\to\infty$.
+                \end{definition}
+                \begin{lemma}
+                    Mixing implies ergodic.
+                \end{lemma}
+                \begin{proof}
+                    If $A\subeq X$ is a $T$-invariant, then $\mu(A)=\mu(A\cap T^{-n}A)\to\mu(A)^2$, so $\mu(A)\in\l\{0,1\r\}$.\qedlem
+                \end{proof}
+            \end{minipage}
+        \end{center}
+        Since $\mu$ is defined by extending the $1/2$-measure on cylinder sets, it suffices to show that $T$ mixes cylinders $A\coloneqq[s]$ and $B\coloneqq[t]$ for $s,t\in2^{<\N}$. Indeed, let $n\geq\ell(s)$ so that the translate $T^{-n}([t])$ contains sequences specified at indices disjoint from that of $s$, so $\mu([s]\cap T^{-n}([t]))=\mu([s])\mu([t])$.
+    \end{proof}
+
+    To give more examples, we will need the following lemma, which is proved the same way as Lemma \ref{99_lebesgue}.
+
+    \begin{lemma}[99\% Lemma for $\mu$]
+        For any measurable $A\subeq2^\N$, there exists a cylinder $[w]\subeq2^\N$ such that at-least $99\%$ of $[w]$ is covered by $A$, i.e. $\mu(A\cap[w])/\mu([w])\geq0.99$.
+    \end{lemma}
+
+    \begin{exercise}
+        Show that the \textit{odometer} transformation $T:2^\N\to2^\N$ is ergodic, where $T$ takes a sequence, thought of as the binary representation of a number written in reverse, and adds $1$ to it (carrying over if necessary); for instance, $T(00110\dots)\coloneqq10110\dots$ and $T(11100\dots)\coloneqq00010\dots$, and by convention, we let $T(11111\dots)\coloneqq00000\dots$.
+
+        \textsc{Hint:} Use the 99\% Lemma for $\mu$, with the observation that for any words $s,t\in2^{<\N}$ of the same length, there exists $k\in\N$ such that $T^k(sx)=tx$ for all $x\in2^\N$.
+    \end{exercise}
+
+    Let us generalize ergodicity of transformations $T:(X,\mu)\to(X,\mu)$ to actions of a group $G$ on $(X,\mu)$.
+
+    \begin{definition}
+        Let $G$ be a group and let $(X,\mu)$ be a standard Borel space. An action $\phi:G\act X$ is said to be \textit{Borel} if for each $g\in G$, the map $x\mapsto gx$ is Borel; \textit{measure-preserving} if it is Borel and $\mu(gB)=\mu(B)$ for each $g\in G$ and each Borel $B\subeq X$; and \textit{ergodic} if it is measure-preserving and the orbit equivalence relation $\E_\phi$ of $\phi$, given by $x\E_\phi y$ iff $y=gx$ for some $g\in G$, is ergodic.
+    \end{definition}
+
+    \begin{exercise}
+        For each $n\in\N$, let $\sigma_n:2^\N\to2^\N$ be the \textit{$n^\textrm{th}$-bit flip} map, defined by flipping $x_n$ to $1-x_n$ and fixing all other coordinates. Let $G\coloneqq\gen{\sigma_n}_{n\in\N}\iso\bigoplus_n\Z/2\Z$, which naturally acts on $2^\N$.
+        \begin{enumerate}
+            \item Show that the orbit equivalence relation $\E_\phi$ is given by \textit{eventual equality} (denoted $\E_0$), where $x\E_0y$ iff there exists $N\in\N$ such that $x_n=y_n$ for all $n\geq N$.
+                \vspace{-0.05in}
+            \item Observe that $\phi$ is a pmp action.
+                \vspace{-0.05in}
+            \item Use the 99\% Lemma for $\mu$ to show that $\phi$ is ergodic.
+        \end{enumerate}
+    \end{exercise}
+
+    \begin{exercise}
+        Consider the translation action $\phi:\Q\act(\R,\lambda)$, whose orbit equivalence relation is given by $x\E_\Q y$ iff $x-y\in\Q$. Use the 99\% Lemma for $\lambda$ to show that $\phi$ is ergodic.
+    \end{exercise}
+
+    The following exercise shows that ergodicity gives rise to non-measurable transversals.
+
+    \begin{exercise}\label{exe:ergodic_non-measurable}
+        Let $(X,\mu)$ be an atomless standard probability space and let $\phi:G\act(X,\mu)$ be a pmp action. Prove that if $\phi$ is ergodic, then every transversal of $\E_\phi$ is non-measurable.
+
+        \textsc{Hint}: Let $T\subeq X$ be a measurable transversal, so $X=\bigsqcup_{g\in G}gT$. Observe that $\mu(T)>0$, and use that $(X,\mu)$ is atomless to partition $T=S_1\sqcup S_2$ non-trivially. What can you say about the $\E_\phi$-saturations of $S_i$?
+    \end{exercise}
+
+    To study ergodic transformations further, it would be useful to have alternative characterizations of ergodicity. The \textit{Ergodic Theorems} (see Lecture \ref{sec:5}) are the strongest results of this kind; here, we will be content with the following easy reformulations.
+
+    \begin{theorem}
+        The following are equivalent for a pmp transformation $T:X\to X$.
+        \begin{enumerate}
+            \item $T$ is ergodic.
+                \vspace{-0.05in}
+            \item Every $T$-invariant measurable function $f:X\to Y$ to a standard Borel space $Y$ is constant a.e..
+                \vspace{-0.05in}
+            \item For every positively-measured subset $A\subeq X$, its saturation $[A]_{\E_T}$ is conull.
+        \end{enumerate}
+    \end{theorem}
+    \begin{proof}
+        Note that (2) and (3) each easily imply (1): if $A\subeq X$ is a measurable $T$-invariant set, then
+        \begin{enumerate}
+            \item[2.] the characteristic function $\chi_A:X\to\l\{0,1\r\}$ is $T$-invariant, and hence either $A$ is null or conull;
+                \vspace{-0.05in}
+            \item[3.] if $A$ is not null, then $\mu(A)>0$, and hence $A=[A]_{\E_T}$ is conull.
+        \end{enumerate}
+        Conversely, suppose that $T$ is ergodic. For (3), note that if $A$ has positive measure, then so must $[A]_{\E_T}$ \textit{if it is measurable in the first place}, so $[A]_{\E_T}$ is conull. Now, either invoke some Descriptive Set Theory and prove that $[A]_{\E_T}$ is measurable, or proceed by letting $A_0\subeq_\mu A$ be forward recurrent, so that $[A_0]_{\E_T}\subeq[A]_{\E_T}$ is measurable by Corollary \ref{cor:saturation_almost_measurable}; hence $[A]_{\E_T}$ is measurable too, as desired.
+
+        It remains to prove (2). By the Borel Isomorphism Theorem (Theorem \ref{thm:borel_isomorphism_theorem}), it suffices to prove it in the case when $Y\coloneqq2^\N$ equipped with the Borel $\sigma$-algebra, which is generated by cylinders. Let $f:X\to2^\N$ be a $T$-invariant measurable function, so $f^{-1}(B)$ is $T$-invariant for each Borel $B\subeq2^\N$. In particular, $f^{-1}([w])$ is either null or conull for each word $w\in2^{<\N}$. We proceed by finding a (necessarily unique) sequence $y\in2^\N$ such that $f^{-1}(y)$ is conull, as follows. Call a word $w\in2^{<\N}$ \textit{heavy} if $f^{-1}([w])$ is conull; clearly $\e$ is heavy, and if $w$ is heavy, then exactly one of $w0$ and $w1$ is heavy. Thus there is a unique heavy branch $\l\{y|n\r\}_{n\in\N}$, which gives rise to the desired sequence $y\in2^\N$ since $f^{-1}(y)=\bigcap_nf^{-1}([y|n])$ is the intersection of countably-many conull sets, hence conull.
+    \end{proof}
+
+    \section{Lecture 5 (Zhaoshen Zhai): Birkhoff's Pointwise Ergodic Theorem}\label{sec:5}
+
+    \begin{theorem}[Birkhoff's Pointwise Ergodic Theorem]\label{thm:pointwise_ergodic_theorem}
+        \TODO
+    \end{theorem}
+
+    \printbibliography
+
+    {\footnotesize
+        \textsc{Department of Mathematics and Statistics, McGill University, 805 Sherbrooke Street West, Montreal, QC, H3A 0B9, Canada}
+
+        \textit{Email address: \tt{zhaoshen.zhai@mail.mcgill.ca}}
+    }
+\end{document}

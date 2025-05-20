@@ -1,0 +1,67 @@
+\documentclass[reqno, twoside]{article}
+\input{preamble.sty}
+\input{macros.sty}
+
+\begin{document}
+    \title{\textbf{\normalsize\MakeUppercase{Summer 2025 Reading Group on Ergodic Theory}}}
+    \author{\normalsize\textsc{Exercise Sheet 1 (Samy Lahlou): Crash course on Measure Theory, Part I}}
+    \date{}
+    \maketitle
+    \freefootnote{\textit{Date}: \today.}
+
+    Throughout, let $(X,\mc{B},\mu)$ be a measure space and let $A_n\in\mc{B}$.
+
+    \begin{exercise}[Monotonicity]
+        If $A_1\subeq A_2$, then $\mu(A_1)\leq\mu(A_2)$.
+    \end{exercise}
+
+    Deduce that if $\mu$ is finite, then $\mu$ is a bounded function. (Are $\sigma$-finite measures bounded?)
+
+    \begin{exercise}[Inclusion-exclusion]
+        For any $A_1,A_2\in\mc{B}$, we have $\mu(A_1\cup A_2)+\mu(A_1\cap A_2)=\mu(A_1)+\mu(A_2)$.
+    \end{exercise}
+
+    \begin{exercise}[Continuity $\incto$]
+        If $(A_n)_{n\in\N}$ is increasing, then $\mu(\bigcup_{n\in\N}A_n)=\lim_{n\to\infty}\mu(A_n)$.
+    \end{exercise}
+
+    \begin{exercise}[Continuity $\decto$]
+        If $(A_n)_{n\in\N}$ is decreasing and $\mu(A_1)<\infty$, then $\mu(\bigcap_{n\in\N}A_n)=\lim_{n\to\infty}\mu(A_n)$.
+    \end{exercise}
+
+    \begin{exercise}
+        Show that $\lambda(\Q)=0$. \textsc{Hint:} What is the Lebesgue measure of singletons?
+    \end{exercise}
+
+    Let $P$ be a property of some points in $X$. We say that $P$ \textit{holds $\mu$-almost everywhere} (or \textit{$\mu$-almost surely}) if $\l\{x\in X\st x\textrm{ satisfies }P\r\}$ is $\mu$-conull.
+
+    \begin{exercise}[Borel-Cantelli Lemmas]
+        Let $(A_n)_{n\in\N}$ be a sequence of $\mu$-measurable sets.
+        \begin{enumerate}
+            \item If $\sum_{n\in\N}\mu(A_n)<\infty$, then $\mu$-almost every $x\in X$ lives in at-most finitely-many $A_n$.
+                \vspace{-0.05in}
+            \item (Measure Compactness). If $\mu(X)<\infty$ and there exists $\epsilon>0$ such that $\mu(A_n)\geq\epsilon$ for all $n\in\N$, then at least an $\epsilon$-measure set of $x\in X$ lives in infinitely-many $A_n$'s.
+        \end{enumerate}
+    \end{exercise}
+
+    For measurable spaces $(X_1,\mc{B}_1)$ and $(X_2,\mc{B}_2)$, define $\mc{B}_1\otimes\mc{B}_2\coloneqq\l\langle B_1\times B_2\st B_i\in\mc{B}_i\r\rangle_\sigma$.
+
+    \begin{exercise}
+         Show that if $X_i$ are second-countable topological spaces, then $\mc{B}(X_1\times X_2)=\mc{B}(X_1)\otimes\mc{B}(X_2)$.
+     \end{exercise}
+
+    \begin{exercise}
+        Let $X$ be a topological space. A \textit{Cantor set} is a subset $C\subeq X$ homeomorphic to $2^\N$.
+        \begin{enumerate}
+            \item Show that the `middle-thirds Cantor set' $C\subeq[0,1]$ is a Cantor set as in the above definition. Moreover, show that $\lambda(C)=0$. \textsc{Hint:} Recall the construction $C=\bigcap_{n\in\N}C_n$ and use continuity.
+                \vspace{-0.05in}
+            \item Define a Cantor set $C\subeq[0,1]$ with positive Lebesgue measure. \textsc{Hint:} fatten the standard construction.
+        \end{enumerate}
+    \end{exercise}
+
+    A measurable set $A\subeq X$ is said to be an \textit{atom} if there is no subset $B\subeq A$ with $0<\mu(B)<\mu(A)$. For example, singletons $\l\{x\r\}$ are atoms under the Dirac measure $\delta_x$. More generally:
+
+    \begin{exercise}
+        If $(X,\mc{B},\mu)$ is a $\sigma$-finite measure space, $\mc{B}$ is \textit{countably generated} (i.e., $\mc{B}=\l\langle\mc{B}_0\r\rangle$ for some countable $\mc{B}_0\subeq\pow(X)$), and \textit{separates points} (i.e., if $x\neq y$, then there exists $B\in\mc{B}$ such that $x\in B\not\ni y$.), then every atom $A\in\mc{B}$ is a singleton.
+    \end{exercise}
+\end{document}

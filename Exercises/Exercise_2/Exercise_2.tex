@@ -1,0 +1,45 @@
+\documentclass[reqno, twoside]{article}
+\input{preamble.sty}
+\input{macros.sty}
+
+\begin{document}
+    \title{\textbf{\normalsize\MakeUppercase{Summer 2025 Reading Group on Ergodic Theory}}}
+    \author{\normalsize\textsc{Exercise Sheet 2 (Samy Lahlou): Crash course on Measure Theory, Part II}}
+    \date{}
+    \maketitle
+    \freefootnote{\textit{Date}: \today.}
+
+    Throughout, let $(X,\mu)$ be a measure space.
+
+    \begin{exercise}
+        Continuous maps are Borel. \textsc{Hint:} Define a $\sigma$-algebra containing open sets in the codomain.
+    \end{exercise}
+
+    \begin{exercise}
+        In separable metric spaces, pointwise limits of $\mu$-measurable functions are $\mu$-measurable, i.e., if $(f_n)$ is a sequence of $\mu$-measurable maps $f_n:X\to Y$ from a measure space $(X,\mu)$ to a separable space $Y$, and $f\coloneqq\lim_nf_n$ (pointwise), then $f:X\to Y$ is $\mu$-measurable.
+
+        \textsc{Hint:} Let $\mc{C}\coloneqq\{B\in\mc{B}(Y)\st f^{-1}(B)\in\Meas_\mu\}$. Show that $\mc{C}$ is a $\sigma$-algebra containing all open set in $Y$, so $\mc{C}=\mc{B}(Y)$, as desired. For each $U\subeq Y$ open, use separability to write $U=\bigcup_{n\in\N}B_n$, where each $B_n$ is a ball whose closure is contained in $U$, and show that $f^{-1}(U)\in\Meas_\mu$.
+    \end{exercise}
+
+    \begin{exercise}
+        If $f_1,f_2:(X,\mu)\to\R$ are $\mu$-measurable and $g:\R^2\to\R$ is Borel, then $g(f_1,f_2):X\to\R$ is also $\mu$-measurable. In particular, $f_1+f_2$ and $f_1\cdot f_2$ are $\mu$-measurable.
+    \end{exercise}
+
+    \begin{exercise}
+        If $(f_n)$ is a sequence of $\mu$-measurable functions $f_n:X\to\bar{\R}$, then $\sup_nf_n$, $\inf_nf_n$, $\limsup_nf_n$, and $\liminf_nf_n$ are also $\mu$-measurable.
+    \end{exercise}
+
+    \begin{exercise}
+        Let $f,g\in L^p(X,\mu)$. If $f\leq g$, then $\l\|f\r\|_p\leq\l\|g\r\|_p$.
+    \end{exercise}
+
+    \begin{exercise}
+        For any $f,g\in L^1(X,\mu)$ and $a,b\in\R$, we have $\int(af+bg)\,\d\mu=a\int f\,\d\mu+b\int g\,\d\mu$.
+
+        \textsc{Hint:} Simple $\rightsquigarrow_\textrm{MCT}$ $L^+$ $\rightsquigarrow$ $L^1$.
+    \end{exercise}
+
+    \begin{exercise}
+        Let $f,g\in L^1(X,\mu)$. If $f=g$ $\mu$-a.e., then $\int f\,\d\mu=\int g\,\d\mu$. \textsc{Hint:} Consider $\int(f-g)\,\d\mu$.
+    \end{exercise}
+\end{document}

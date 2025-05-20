@@ -1,5 +1,0 @@
-\contentsline {section}{\numberline {1}Lecture 1 (Samy Lahlou): Crash course on Measure Theory, Part I}{1}{section.1}%
-\contentsline {section}{\numberline {2}Lecture 2 (Samy Lahlou): Crash course on Measure Theory, Part II}{3}{section.2}%
-\contentsline {section}{\numberline {3}Lecture 3 (Peng Bo): An introduction to Ergodic Theory}{5}{section.3}%
-\contentsline {section}{\numberline {4}Lecture 4 (Zhaoshen Zhai): Examples of Ergodic Transformations}{7}{section.4}%
-\contentsline {section}{\numberline {5}Lecture 5 (Zhaoshen Zhai): Birkhoff's Pointwise Ergodic Theorem}{9}{section.5}%

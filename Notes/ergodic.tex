@@ -542,9 +542,7 @@
         \begin{enumerate}
             \item Show that the orbit equivalence relation $\E_\phi$ is given by \textit{eventual equality} (denoted $\E_0$), where $x\E_0y$ iff there exists $N\in\N$ such that $x_n=y_n$ for all $n\geq N$.
                 \vspace{-0.05in}
-            \item Observe that $\phi$ is a pmp action.
-                \vspace{-0.05in}
-            \item Use the 99\% Lemma for $\mu$ to show that $\phi$ is ergodic.
+            \item Observe that $\phi$ is a pmp action and use the 99\% Lemma for $\mu$ to show that $\phi$ is ergodic.
         \end{enumerate}
     \end{exercise}
 
@@ -562,7 +560,7 @@
 
     To study ergodic transformations further, it would be useful to have alternative characterizations of ergodicity. The \textit{Ergodic Theorems} (see Lecture \ref{sec:5}) are the strongest results of this kind; here, we will be content with the following easy reformulations.
 
-    \begin{theorem}
+    \begin{theorem}\label{thm:easy_characterizations_ergodicitiy}
         The following are equivalent for a pmp transformation $T:X\to X$.
         \begin{enumerate}
             \item $T$ is ergodic.
@@ -586,13 +584,133 @@
 
     \section{Lecture 5 (Zhaoshen Zhai): Birkhoff's Pointwise Ergodic Theorem}\label{sec:5}
 
-    \TODO[motivate]
+    Throughout, let $(X,\mu,T)$ be a measure-preserving dynamical system. We can rephrase ($1\Leftrightarrow3$) in Theorem \ref{thm:easy_characterizations_ergodicitiy} by the statement that $T$ is ergodic iff for every positively-measured subset $A\subeq X$ and any $x\in X$, we have $[x]_{\E_T}\cap A\neq\e$. This gives us a `soft'/`qualitative' characterization of ergodicity: every orbit meets every positively-measured set. It turns out that we can boost this and obtain a more quantitative statement too, of, say, how \textit{often} they meet.
 
     {\vspace{-0.1in}\small\subsection*{Further reading}\cite[Lectures 5 to 7]{Tse22}.}
 
     \begin{theorem}[Birkhoff's Pointwise Ergodic Theorem]\label{thm:pointwise_ergodic_theorem}
-        \TODO
+        A measure-preserving dynamical system $(X,\mu,T)$ is ergodic iff any of the following statements hold, where $I_n^T(x)\coloneqq\{T^ix\}_{i<n}$ and $A_n^Tf\coloneqq\frac{1}{n}\sum_{i<n}f\circ T^i$.
+        \begin{enumerate}
+            \item For all $f\in L^1(X,\mu)$, we have $\lim_{n\to\infty}A_n^Tf=_\mu\int f\,\d\mu$.
+                \vspace{-0.05in}
+            \item For all $f\in L^\infty(X,\mu)$, we have $\lim_{n\to\infty}A_n^Tf=_\mu\int f\,\d\mu$.
+                \vspace{-0.05in}
+            \item For all measurable $A\subeq X$, we have $\lim_{n\to\infty}\frac{1}{n}|I_n^T(x)\cap A|=\mu(A)$ for $\mu$-a.e. $x\in X$.
+        \end{enumerate}
     \end{theorem}
+
+    We can interpret (3) by saying that the average number of times the forward-orbit of $\mu$-a.e. $x\in X$ meets $A$ tends to $\mu(A)$, so if $\mu(A)>0$, then the (forward-)orbit of $x$ will always meet $A$. Statements (1) and (2) are generalizations of (3); instead of counting the average number of times $I_n^T(x)$ meets $A$, we consider the average value of a measurement $f:X\to\R$ (i.e., $f\in L^1(X,\mu)$ or $f\in L^\infty(X,\mu)$) in the following two senses:
+    \begin{itemize}
+        \item (Time average). For $x\in X$, the \textit{time average} value of $f$ evaluated at $x$ is $A_n^Tf(x)\coloneqq\frac{1}{n}\sum_{i<n}f(T^i(x))$.
+            \vspace{-0.20in}
+        \item (Space average). The \textit{space average} $\int f\,\d\mu$ of $f$, which is the average evaluated on the entire system.
+    \end{itemize}
+
+    Birkhoff's Pointwise Ergodic Theorem then states that these two averages coincide iff $T$ is ergodic.
+
+    \begin{proof}
+        Clearly $(1)\Rightarrow(2)$. For $(2)\Rightarrow(3)$, take $f\coloneqq\chi_A$ and note that $\frac{1}{n}|I_n^T(x)\cap A|=A_n^Tf(x)$. If (3) holds, then $T$ is ergodic since if $A\subeq X$ is a measurable $T$-invariant set, then the orbit of any $x\in X$ either lies in $A$ or $A^c$, so $\frac{1}{n}|I_n^T(x)\cap A|\in\l\{0,1\r\}$ uniformly for all $n\in\N$. By (3), this shows that $\mu(A)\in\l\{0,1\r\}$.
+
+        Suppose now that $T$ is ergodic and let $f\in L^1(X,\mu)$. Replacing $f$ by $f-\int f\,\d\mu$, we can assume that $\int f\,\d\mu=0$. To show that $\lim_nA_n^Tf=0$, it suffices by symmetry to show that $\limsup_nA_n^Tf\leq0$.
+
+        To this end, we first note that $l\coloneqq\limsup_nA_n^Tf:X\to\R$ is $T$-invariant. Indeed, for any $x\in X$, we have
+        \vspace{-0.05in}
+        \begin{equation*}
+            A_n^Tf(x)=\frac{1}{n}f(x)+\frac{n-1}{n}A_{n-1}^Tf(x),
+        \end{equation*}
+        so taking $\limsup_n$ gives $l(x)=l(Tx)$ as desired. Thus $l$ is constant a.e. by Theorem \ref{thm:easy_characterizations_ergodicitiy}, say at $l_0\in\R$.
+
+        Suppose towards a contradiction that $f^\ast\coloneqq l_0/2>0$, so for each $x\in X$, there is a minimal $\eta(x)\in\N$ such that $A_{\eta(x)}^Tf(x)\geq f^\ast$. Thus, we can cover $X$ by intervals $I_x\coloneqq I_{\eta(x)}^Tx$ so that the average of $f$ on those intervals is no less than $f^\ast$. If we can make the lengths of those intervals uniform, i.e., find some $n\in\N$ such that $A_n^Tf\geq f^\ast$, then
+        \begin{equation}\tag{$\ast$}
+            0=\int f\,\d\mu\overset{!}{=}\int A_n^Tf\,\d\mu\geq\int f^\ast\,\d\mu=f^\ast>0,
+        \end{equation}
+        a contradiction, where the equality (!) follows from the following
+        \begin{center}
+            \begin{minipage}{0.95\textwidth}
+                \begin{lemma}[Local-global Bridge]
+                    For each $f\in L^1(X,\mu)$ and $n\in\N$, we have $\int f\,\d\mu=\int A_n^Tf\d\mu$.
+                \end{lemma}
+                \begin{proof}
+                    Since $T$ is pmp, we have $\int f\,\d\mu=\int f\circ T\,\d\mu$ by the Change of Variables formula, so $\int\sum_{i<n}f\circ T^i=n\int f\,\d\mu$, and hence the desired equality holds.\qedlem
+                \end{proof}
+            \end{minipage}
+        \end{center}
+        This is too much to ask for in general; instead, we try to cover intervals $I_n^T(x)$ for large enough $n\gg0$ by the `good' intervals of the form $I^T_{\eta(y)}(y)\coloneqq I_y$, on which we have the desired inequality $A^T_{\eta(y)}f\geq f^\ast$:
+        \begin{center}
+            \begin{minipage}{0.95\textwidth}
+                \begin{lemma}[Tiling Lemma]
+                    Let $\eta:X\to\N$ be an arbitrary measurable function. For any $\epsilon>0$, there exists $n\gg0$ such that for each $x\in X$ except on a measure-$\epsilon$ set, the interval $I_n^T(x)$ can be tiled, up to an $\epsilon$-fraction, by intervals of the form $I_y\coloneqq I_{\eta(y)}^T(y)$ for $y\in X$.
+                \end{lemma}
+                \begin{proof}
+                    Choose $L\gg0$ such that $B\coloneqq\l\{x\in X\st\eta(x)>L\r\}$ has measure at-most $\epsilon^2/2$, so for each $n\in\N$, the set $Z_n\coloneqq\{x\in X\st A_n^T\chi_B(x)<\epsilon/2\}$ is co-$\epsilon$ since, by the Local-global Bridge, we have
+                    \vspace{-0.05in}
+                    \begin{equation*}
+                        \epsilon^2/2\geq\mu(B)=\int\chi_B\,\d\mu\overset{!}{=}\int A_n^T\chi_B\,\d\mu\geq\int_{X\comp Z_n}A_n^T\chi_B\,\d\mu\geq\frac{\epsilon}{2}\mu(X\comp Z_n).
+                        \vspace{-0.05in}
+                    \end{equation*}
+                    For each $x\in Z_n$, we can tile $I_n^T(x)$ from left to right, skipping `bad' intervals (i.e., intervals $I_y$ with $y\in B$), which leaves out at-most an $(\epsilon/2+L/n)$-fraction of $I_n^T(x)$ untiled by the $I_y$'s; choose $n\gg0$ such that $L/n<\epsilon/2$.\qedlem
+                \end{proof}
+            \end{minipage}
+        \end{center}
+        With this in hand, we can start to attempt to replicate $(\ast)$. To this end, first choose $M\gg0$ so that $X_0\coloneqq\l\{x\in X\st f\geq-M\r\}$ is large; more specifically, so that $\int_{X_0^c}(f-f^\ast)\d\mu\leq f^\ast/2$, and hence $\int_{X_0^c}f\,\d\mu\geq f^\ast/2$.
+
+        Focus on $f_0\coloneqq\l.f\r|_{X_0}$. Applying the Tiling Lemma to some $\epsilon>0$ to be chosen later, there is some $n\gg0$ and some $Z\subeq X_0$ of measure at-least $\mu(X_0)-\epsilon$ such that for each $x\in Z$, the interval $I_n^T(x)$ is tiled by $I_y$'s up to an $\epsilon$-fraction. Since $f_0\geq f$, we have $A^T_{\eta(y)}f_0(y)\geq f^\ast$ too, so for all $x\in Z$,
+        \vspace{-0.05in}
+        \begin{equation*}
+            A_n^Tf_0(x)\geq(1-\epsilon)f^\ast+\epsilon(-M)=f^\ast-\epsilon(M+f^\ast)\geq f^\ast/2
+            \vspace{-0.05in}
+        \end{equation*}
+        for sufficiently small $\epsilon>0$. We can now replicate $(\ast)$ to obtain
+        \vspace{-0.05in}
+        \begin{equation*}
+            0=\int f\,\d\mu=\int_{X_0^c}f\,\d\mu+\int_Zf_0\,\d\mu+\int_{X_0\comp Z}f_0\,\d\mu\geq\frac{f^\ast}{2}+\int_ZA_n^Tf_0\,\d\mu+\mu(X_0\comp Z)(-M)\geq f^\ast-\epsilon M>0
+            \vspace{-0.05in}
+        \end{equation*}
+        for sufficiently small $\epsilon>0$, as desired.
+    \end{proof}
+
+    \begin{remark}
+        If $f\in L^\ast(X,\mu)$ and $\eta$ is bounded, we can tile \textit{every} interval $I_n^T(x)$ for sufficiently large $n\gg0$ by the $I_y$'s, up to an $\epsilon$-fraction. This in turn simplifies the proof so that $A_n^Tf\geq f^\ast$ for a uniform $n\in\N$, so that $(\ast)$ holds.
+    \end{remark}
+
+    \begin{exercise}
+        What is the average value of a given digit $0\leq m\leq9$, say $m\coloneqq7$, to occur in the decimal representation of $\lambda$-a.e. $x\in[0,1]$? That is, does $\ell_m(x)\coloneqq\lim_n\frac{1}{n}|\{i<n\st x_i=m\}|$ exist, and what is it?
+
+        \textsc{Hint:} consider the $10$-ary Baker's map $b_{10}:[0,1)\to[0,1)$  sending $x\mapsto 10x$ (mod $1$), which is isomorphic to the shift map on $10^\N$.
+    \end{exercise}
+
+    \begin{exercise}[Equidistribution Theorem]
+        A sequence $(x_n)_n$ in $S^1$ is said to be \textit{equidistributed} if for every interval $I\subeq S^1$, we have $\lim_n\frac{1}{n}|\l\{x_i\r\}_{i<n}\cap I|=\lambda(I)$. Prove that if $x_n=n\alpha$ for some irrational $\alpha\in S^1$, then $(x_n)_n$ is equidistributed. \textsc{Hint:} Don't overthink it.
+    \end{exercise}
+
+    \begin{exercise}[Law of Large Numbers]
+        If you know statistics, prove it!
+    \end{exercise}
+
+    \begin{exercise}[An ergodic theorem for non-ergodic actions]
+        Intuitively, Birkhoff's Pointwise Ergodic Theorem states that ergodic transformations $T:X\to X$ stir up $X$ so well that they spread any $f\in L^1(X,\mu)$ evenly on $X$, making it constant at $\int f\,\d\mu$; indeed, `$f\circ T^\infty=\int f\,\d\mu$'.
+
+        If $T$ is not ergodic, then there is a non-trivial partition $X=X_1\sqcup X_2$ into $T$-invariant pieces. The best that one can hope is at after `enough' partitions $X=\bigsqcup_iX_i$, $T$ still spreads each $f_i\coloneqq f\chi_{X_i}$ evenly on $X_i$. Viewing $f$ from the lens of these $T$-invariant pieces leads to the \textit{conditional expectation} of $f$:
+        \begin{center}
+            \begin{minipage}{0.95\textwidth}
+                \begin{definition}
+                    Let $\mc{A}\subeq\mc{B}(X)$ be a sub-$\sigma$-algebra of $\mc{B}(X)$. For each $f\in L^1(X,\mu)$, there is a unique (up to a $\mu$-null set) $\mc{A}$-measurable function $f_\mc{A}$ such that $\int_Af\,\d\mu=\int_Af_\mc{A}\,\d\mu$ for each $A\in\mc{A}$, called the \textit{conditional expectation of $f$ w.r.t. $\mc{A}$}. We write $\E(f|\mc{A})$ for $f_\mc{A}$.
+                \end{definition}
+                \begin{remark}
+                    If $\mc{P}\subeq\mc{B}(X)$ is a countable partition of $X$, then $\E(f|\gen{\mc{P}}_\sigma)=\sum_{P\in\mc{P}}\l(\frac{1}{\mu(P)}\int_Pf\,\d\mu\r)\chi_P$.
+                \end{remark}
+            \end{minipage}
+        \end{center}
+        Prove that for any (not necessarily ergodic) pmp transformation $T:X\to X$ and any $f\in L^1(X,\mu)$, we have $\lim_{n\to\infty}A_n^Tf=_\mu\E(f|\mc{B}_T)$, where $\mc{B}_T\subeq\mc{B}(X)$ is the $\sigma$-algebra generated by all $T$-invariant Borel sets of $X$.
+
+        \textsc{Hint}: Same as the regular proof, only that $f^\ast:X\to\R$ is not necessarily constant, but just $T$-invariant.
+    \end{exercise}
+
+    \begin{exercise}[$L^p$-ergodic theorem]
+        Prove that for any pmp-transformation $T:X\to X$ and $p\geq1$, we have $A_n^Tf\to_{L^p}\E(f|\mc{B}_T)$ for all $f\in L^p(X,\mu)$.
+
+        \textsc{Hint}: If $f$ is bounded, then we are done by the DCT. Otherwise, let $f_k\to_{L^p}f$ where each $f_k$ is bounded and triangle-inequality your way through, using that $\|A_n^Tf\|_{L^p}\leq\|f\|_{L^p}$ (prove this too).
+    \end{exercise}
 
     \printbibliography
 

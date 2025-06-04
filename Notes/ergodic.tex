@@ -616,7 +616,7 @@
         To this end, we first note that $l\coloneqq\limsup_nA_n^Tf:X\to\R$ is $T$-invariant. Indeed, for any $x\in X$, we have
         \vspace{-0.05in}
         \begin{equation*}
-            A_n^Tf(x)=\frac{1}{n}f(x)+\frac{n-1}{n}A_{n-1}^Tf(x),
+            A_n^Tf(x)=\frac{1}{n}f(x)+\frac{n-1}{n}A_{n-1}^Tf(T(x)),
         \end{equation*}
         so taking $\limsup_n$ gives $l(x)=l(Tx)$ as desired. Thus $l$ is constant a.e. by Theorem \ref{thm:easy_characterizations_ergodicitiy}, say at $l_0\in\R$.
 
@@ -711,6 +711,12 @@
 
         \textsc{Hint}: If $f$ is bounded, then we are done by the DCT. Otherwise, let $f_k\to_{L^p}f$ where each $f_k$ is bounded and triangle-inequality your way through, using that $\|A_n^Tf\|_{L^p}\leq\|f\|_{L^p}$ (prove this too).
     \end{exercise}
+
+    \section{Lecture 6 (Ludovic Rivet): An overview of Szemeredi's Theorem}\label{sec:6}
+
+    \TODO
+
+    {\vspace{-0.1in}\small\subsection*{Further reading}Parts of \cite[Lectures 13 to 17]{Tse22} and \cite[Lecture 10]{Tao08}.}
 
     \printbibliography
 

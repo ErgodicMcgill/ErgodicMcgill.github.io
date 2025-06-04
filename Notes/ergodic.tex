@@ -712,11 +712,53 @@
         \textsc{Hint}: If $f$ is bounded, then we are done by the DCT. Otherwise, let $f_k\to_{L^p}f$ where each $f_k$ is bounded and triangle-inequality your way through, using that $\|A_n^Tf\|_{L^p}\leq\|f\|_{L^p}$ (prove this too).
     \end{exercise}
 
-    \section{Lecture 6 (Ludovic Rivet): An overview of Szemeredi's Theorem}\label{sec:6}
-
-    \TODO
+    \section{Lecture 6 (Ludovic Rivet): An overview of Szemerédi's Theorem}\label{sec:6}
 
     {\vspace{-0.1in}\small\subsection*{Further reading}Parts of \cite[Lectures 13 to 17]{Tse22} and \cite[Lecture 10]{Tao08}.}
+
+    Emphasis on `overview'. Erdős and Turan conjectured that if $A\coloneqq(a_i)_{i\in\N}$ is a sequence such that $\sum_i1/a_i\to\infty$, then $A$ contains arbitrarily long arithmetic progressions. Green and Tao proved, in 2004, that this is true for the prime numbers.
+
+    \begin{example}
+        Square-free integers. (Squares don't work; Euler proved that the longest has length $3$.)
+    \end{example}
+
+    Szemerédi proved this conjecture for special classes of sequences $A\subeq\N$.
+
+    \begin{definition}
+        The \textit{Banach density} of $A\subeq\N$ is $d_b(A)\coloneqq\lim_{n\to\infty}\frac{1}{n}|A\cap\l\{1,\dots,n\r\}\!|$.
+
+        The \textit{upper density} of $A\subeq\N$ is $\bar{d}_b(A)\coloneqq\limsup_{n\to\infty}\frac{1}{n}|A\cap\l\{1,\dots,n\r\}\!|$.
+    \end{definition}
+
+    \begin{theorem}[Szemerédi; 1975]
+        The conjecture is true for sets of positive upper density.
+    \end{theorem}
+
+    (Note that the density of primes is zero; so Green-Tao is cool!)
+
+    In 1977, Furstenberg gave an ergodic theoretic proof of Szemerédi's Theorem.
+
+    \begin{theorem}[Furstenberg Recurrence]
+        For any dynamical system $(X,\mu,T)$ and any positive-measure $A\subeq X$, for any $k\in\N$, there exists $n\geq1$ such that
+        \begin{equation*}
+            \mu(A\cap T^{-n}A\cap T^{-2n}A\cap\cdots\cap T^{-k(n-1)}A)>0.
+        \end{equation*}
+    \end{theorem}
+
+    When $k=2$, we recover Poincaré Recurrence. To illustrate, let us sketch a proof for rotations on $S^1$, and the shift on $2^\N$.
+    \begin{enumerate}
+        \item For rotations, use density and for each $k$, find $n$ so that $(R_\alpha)^n$ is almost the identity.
+            \vspace{-0.05in}
+        \item For shifts, recall that $\mu(A\cap T^{-n}B)\to\mu(A)\mu(B)$, so $\mu(A\cap T^{-n}A\cap\cdots T^{-k(n-1)}A)\to\mu(A)^k>0$.
+    \end{enumerate}
+
+    In general, Furstenberg-Zimmer Structure Theorem...
+
+    \begin{proof}[Proof that Furstenberg $\Rightarrow$ Szemerédi]
+        In $2^\N$, let $(x_A)_n\coloneqq\chi_A(n)$, and let $X$ be the saturation of $\l\{\chi_A(n)\st n\in\N\r\}$. Let $T_X\coloneqq T|X$. Note that $T_X^n(x_A)\in[1]$ iff $(x_A)_n=1$ iff $n\in A$. Note that $\bar{d}_b(A)>0$, so there is a subsequence $(n_j)\in\N$  such that $\lim_j\frac{1}{n_j}|A\cap\l\{0,\dots,n-1\r\}|\to0$.
+
+        Let $\mu_j\coloneqq\frac{1}{n_j}\sum_{i\leq n_j}\delta_{T_X^i(x_A)}$, so $\mu_j([1])=\frac{1}{n_j}|A\cap\l\{0,\dots,n-1\r\}|$. Then $\mu_j\to\mu$ by magic. Note that $\mu_j([1])=\bar{d}_b(A)>0$ and $\mu$ is $T_X$-invariant. Applying Furstenberg's Theorem, for each $k\in\N$ there is $n\geq1$ such that $\mu([1]\cap T^{-n}[1]\cap T^{-2n}[1]\cap\cdots\cap T^{-k(n-1)}[1])>0$. Thus there exists $a$ such that $T_X^a(x_A)\in[1]\cap\cdots\cap T^{-k(n-1)}[1]$, so $T_X^a(x_A)\in T_X^{-in}[1]$ for each $i<k$, so $T_X^{a+in}(x_A)\in[1]$, and thus $a+in\in A$ for each $i<k$.
+    \end{proof}
 
     \printbibliography
 

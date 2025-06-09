@@ -616,7 +616,7 @@
         To this end, we first note that $l\coloneqq\limsup_nA_n^Tf:X\to\R$ is $T$-invariant. Indeed, for any $x\in X$, we have
         \vspace{-0.05in}
         \begin{equation*}
-            A_n^Tf(x)=\frac{1}{n}f(x)+\frac{n-1}{n}A_{n-1}^Tf(x),
+            A_n^Tf(x)=\frac{1}{n}f(x)+\frac{n-1}{n}A_{n-1}^Tf(T(x)),
         \end{equation*}
         so taking $\limsup_n$ gives $l(x)=l(Tx)$ as desired. Thus $l$ is constant a.e. by Theorem \ref{thm:easy_characterizations_ergodicitiy}, say at $l_0\in\R$.
 
@@ -711,6 +711,84 @@
 
         \textsc{Hint}: If $f$ is bounded, then we are done by the DCT. Otherwise, let $f_k\to_{L^p}f$ where each $f_k$ is bounded and triangle-inequality your way through, using that $\|A_n^Tf\|_{L^p}\leq\|f\|_{L^p}$ (prove this too).
     \end{exercise}
+
+    \section{Lecture 6 (Ludovic Rivet): An overview of Szemerédi's Theorem}\label{sec:6}
+
+    This is the first in a series of lectures towards Furstenberg's proof of Szemerédi's Theorem.
+
+    {\vspace{-0.1in}\small\subsection*{Further reading}Parts of \cite[Lectures 16 and 17]{Tse22} and \cite[Lecture 10]{Tao08}.}
+
+    \begin{conjecture}[Erdős, Turán]\label{con:erdos_turan}
+        Let $A\subeq\N$ be a set such that $\sum_{a\in A}1/a\to\infty$. Then $A$ contains arbitrarily long arithmetic progressions, i.e., for any $k\geq1$, there exists $n\in\N$ and $r\geq1$ such that $\l\{n+ir\st i<k\r\}\subeq A$.
+    \end{conjecture}
+
+    Green and Tao proved, in 2004, that this is true when $A$ is the set of prime numbers. Here, we give an overview a much easier positive instance of this conjecture, namely, when the set $A$ is `dense enough'.
+
+    \begin{definition}
+        The \textit{(Banach) density} of a subset $A\subeq\N$ is $d_b(A)\coloneqq\lim_n\frac{1}{n}|A\cap\l\{0,\dots,n-1\r\}\!|$. Replacing `$\lim$' with `$\limsup$', we get the \textit{upper (Banach) density} $\bar{d}_b(A)$ of $A$.
+    \end{definition}
+
+    \begin{theorem}[Szemerédi; 1975]\label{thm:szemeredi}
+        Conjecture \ref{con:erdos_turan} is true for those $A\subeq\N$ such that $\bar{d}_b(A)>0$. In fact, for any $k\geq1$, there exists $n\in\N$ such that $\bar{d}_b(\bigcap_{i<k}(A-in))>0$.
+    \end{theorem}
+
+    \begin{exercise}
+        Square-free integers\footnote{Squares don't work; Euler proved that the longest arithmetic progression in squares has length $3$.} has positive density.
+    \end{exercise}
+
+    \begin{exercise}
+        The density of primes is zero (so the result by Green and Tao does not follow immediately).
+    \end{exercise}
+
+    In 1977, Furstenberg \cite{Fur77} gave an ergodic theoretic proof of Szemerédi's Theorem. First, he established a naturally, but \textit{very hard}, generalization of the Poincaré Recurrence Theorem, and showed that this result is equivalent to Szemerédi's Theorem via a correspondence principle.
+
+    \begin{theorem}[Furstenberg's Multiple Recurrence]\label{thm:furstenberg_multiple_recurrence}
+        Let $(X,\mu,T)$ be a measure-preserving dynamical system. For any positive-measure $A\subeq X$ and any $k\geq1$, there exists $n\geq1$ such that $\mu(\bigcap_{i<k}T^{-in}A)>0$.
+    \end{theorem}
+
+    The case $k=1$ is trivial, and the case $k=2$ is exactly Poincaré's Recurrence Theorem (Theorem \ref{thm:poincare_recurrence}). We will prove this theorem in later lectures, but for now, we can prove it for two examples:
+    \begin{enumerate}
+        \item For the irrational rotation $R_\alpha:S^1\to S^1$ (see Proposition \ref{prp:irrational_rotation_ergodic}), we can find $n\in\N$ such that $R_\alpha^n$ is arbitrarily closed to the identity by solving the equation $n\alpha=10^p$ where $p$ denotes the `precision'. By choosing a good enough approximation, the sets $R_\alpha^{in}(A)$ for $i<k$ intersect on a set of positive measure.
+            \vspace{-0.22in}
+        \item For the shift map $T:2^\N\to2^\N$ (see Proposition \ref{prp:shift_ergodic}), note that $\mu(A\cap T^{-n}B)\to\mu(A)\mu(B)$ since $T$ is mixing, so $\mu(\bigcap_{i<k}T^{-in}A)\to\mu(A)^k>0$.
+    \end{enumerate}
+    Note that Theorem \ref{thm:furstenberg_multiple_recurrence} holds for drastically different reasons in the two examples above; $R_\alpha$ preserves the distance between points, while $T$ mixes points a lot. This hints that the proof of the general case will require some deep idea that connects all measure-preserving systems together. In fact, we will see that they are all `extensions' of a combination of systems of these two types.
+
+    The link between Theorems \ref{thm:szemeredi} and \ref{thm:furstenberg_multiple_recurrence} is via \textit{Furstenberg's Correspondence Principle}.
+
+    \begin{theorem}[Furstenberg's Correspondence Principle on $\N$]\label{thm:furstenberg_correspondence}
+        For any $A\subeq\N$, there is a measure-preserving dynamical system $(X,\mu,T)$ and a set $B\subeq X$ such that for any $k\geq1$ and $n_1,\dots,n_{k-1}\in\N$, we have
+        \vspace{-0.05in}
+        \begin{equation*}
+            \bar{d}_b(A\cap(A-n_1)\cap(A-n_2)\cap\cdots\cap(A-n_{k-1}))\geq\mu(B\cap T^{-n_1}B\cap T^{-n_2}B\cap\cdots\cap T^{-n_{k-1}}B).
+            \vspace{-0.05in}
+        \end{equation*}
+    \end{theorem}
+
+    Combining Theorems \ref{thm:furstenberg_multiple_recurrence} + \ref{thm:furstenberg_correspondence}, we obtain a proof of Theorem \ref{thm:szemeredi} by setting $n_i\coloneqq in$.
+
+    \begin{proof}[Proof of Theorem \ref{thm:furstenberg_correspondence}]
+        By passing to a subsequence, we may assume that $\bar{d}_b(A)=\lim_n|A\cap\l\{0,\dots,n-1\r\}\!|/n$. Consider the shift action $T:2^\N\to2^\N$ and let $B\coloneqq[1]$. Viewing $\chi_A:\N\to2$ as an element of $2^\N$, we have that $T^j\chi_A\in B$ iff $j\in A$. We will define a measure $\mu$ on $X\coloneqq2^\N$ with the desired property.
+
+        For each $n\in\N$, consider the weighted Dirac measure $\mu_n\coloneqq\frac{1}{n}\sum_{j<n}\delta_{T^j\chi_A}$ on $X$. By the Banach-Alaoglu Theorem, the space of probability measures on $X$ is weak$^\ast$-compact. Thus, after passing to a subsequence, there is a weak$^\ast$-limit $\mu_n\to\mu$ so that $(X,\mu,T)$ is a measure-preserving dynamical system and
+        \vspace{-0.05in}
+        \begin{equation*}
+            \mu(B)=\lim_{n\to\infty}\mu_n(B)=\lim_{n\to\infty}\frac{1}{n}\sum_{j<n}\delta_{T^j\chi_A}(B)=\lim_{n\to\infty}\frac{1}{n}|A\cap\l\{0,\dots,n-1\r\}\!|=\bar{d}_b(A).
+            \vspace{-0.05in}
+        \end{equation*}
+        For each $i<k$, observe that $j\in A-n_i$ iff $T^{j+n_i}\chi_A\in B$, which occurs iff $\delta_{T^j\chi_A}(T^{-n_j}B)=1$, and thus
+        \vspace{-0.05in}
+        \begin{equation*}
+            \begin{aligned}
+                \bar{d}_b(A\cap(A-n_1)\cap\cdots\cap(A-n_{k-1}))&\geq\liminf_{n\to\infty}\frac{|A\cap(A-n_1)\cap\cdots\cap(A-n_{k-1})\cap\l\{0,\dots,n-1\r\}\!|}{n} \\
+                                                                           &=\liminf_{n\to\infty}\frac{1}{n}\sum_{j<n}\delta_{T^j\chi_A}(B\cap T^{-n_1}B\cap\cdots\cap T^{-n_{k-1}}B) \\
+                                                                           &=\liminf_{n\to\infty}\mu_n(B\cap T^{-n_1}B\cap\cdots\cap T^{-n_{k-1}}B) \\
+                                                                           &=\mu(B\cap T^{-n_1}B\cap\cdots\cap T^{-n_{k-1}}B),
+            \end{aligned}
+            \vspace{-0.05in}
+        \end{equation*}
+        as desired.
+    \end{proof}
 
     \printbibliography
 

@@ -716,7 +716,7 @@
 
     This is the first in a series of lectures towards Furstenberg's proof of Szemerédi's Theorem.
 
-    {\vspace{-0.1in}\small\subsection*{Further reading}Parts of \cite[Lectures 16 and 17]{Tse22} and \cite[Lecture 10]{Tao08}.}
+    {\vspace{-0.1in}\small\subsection*{Further reading}Parts of \cite[Lectures 16 and 17]{Tse22}, \cite[Lecture 10]{Tao08}, and \cite[Section 7.2-7.3]{EW10}.}
 
     \begin{conjecture}[Erdős, Turán]\label{con:erdos_turan}
         Let $A\subeq\N$ be a set such that $\sum_{a\in A}1/a\to\infty$. Then $A$ contains arbitrarily long arithmetic progressions, i.e., for any $k\geq1$, there exists $n\in\N$ and $r\geq1$ such that $\l\{n+ir\st i<k\r\}\subeq A$.
@@ -733,14 +733,21 @@
     \end{theorem}
 
     \begin{exercise}
-        Square-free integers\footnote{Squares don't work; Euler proved that the longest arithmetic progression in squares has length $3$.} has positive density.
+        Compute the upper and lower densities of the following sets $A\subeq\N$. Do they agree?
+        \begin{enumerate}
+            \item $A\coloneqq\{n\in\N\st\fa m>1(m^2\ndiv n)\}$, the square-free integers.
+                \vspace{-0.05in}
+            \item $A\coloneqq$ prime numbers. \textsc{Hint:} Szemerédi vs. Green-Tao.
+                \vspace{-0.05in}
+            \item $A\coloneqq$ numbers with an odd number of digits.
+        \end{enumerate}
     \end{exercise}
 
-    \begin{exercise}
-        The density of primes is zero (so the result by Green and Tao does not follow immediately).
-    \end{exercise}
+    \begin{remark}
+        Euler proved that the longest arithmetic progression in the set of squares have length $3$, so the density of squares is zero.
+    \end{remark}
 
-    In 1977, Furstenberg \cite{Fur77} gave an ergodic theoretic proof of Szemerédi's Theorem. First, he established a naturally, but \textit{very hard}, generalization of the Poincaré Recurrence Theorem, and showed that this result is equivalent to Szemerédi's Theorem via a correspondence principle.
+    In 1977, Furstenberg \cite{Fur77} gave an ergodic theoretic proof of Szemerédi's Theorem. First, he established a natural, but \textit{very hard}, generalization of the Poincaré Recurrence Theorem, and showed that this result is equivalent to Szemerédi's Theorem via a correspondence principle.
 
     \begin{theorem}[Furstenberg's Multiple Recurrence]\label{thm:furstenberg_multiple_recurrence}
         Let $(X,\mu,T)$ be a measure-preserving dynamical system. For any positive-measure $A\subeq X$ and any $k\geq1$, there exists $n\geq1$ such that $\mu(\bigcap_{i<k}T^{-in}A)>0$.
@@ -789,6 +796,17 @@
         \end{equation*}
         as desired.
     \end{proof}
+
+    \begin{exercise}[Furstenberg-Sárközy]
+        Let $A\subeq\N$ be a subset with positive upper density and let $p\in\Z[x]$ be a polynomial with $p(0)=0$. Using the recurrence theorem below, prove that there exists $a,b\in A$ and some $n\geq1$ such that $x-y=p(n)$. \textsc{Hint:} Use the correspondence theorem.
+        \begin{center}
+            \begin{minipage}{0.95\textwidth}
+                \begin{theorem}[Polynomial Recurrence; {\cite[Section 7.4]{EW10}}]
+                    Let $(X,\mu,T)$ be a measure-preserving dynamical system. For any positive-measure $A\subeq X$, there exists $n\geq1$ such that $\mu(A\cap T^{-p(n)}A)>0$.
+                \end{theorem}
+            \end{minipage}
+        \end{center}
+    \end{exercise}
 
     \printbibliography
 

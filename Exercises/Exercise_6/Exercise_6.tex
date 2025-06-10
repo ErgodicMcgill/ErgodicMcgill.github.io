@@ -1,0 +1,33 @@
+\documentclass[reqno, twoside]{article}
+\input{preamble.sty}
+\input{macros.sty}
+
+\begin{document}
+    \title{\textbf{\normalsize\MakeUppercase{Summer 2025 Reading Group on Ergodic Theory}}}
+    \author{\normalsize\textsc{Exercise Sheet 6 (Ludovic Rivet): The Density of Sets of Integers}}
+    \date{}
+    \maketitle
+    \freefootnote{\textit{Date}: \today.}
+
+    \begin{exercise}
+        Compute the upper and lower densities of the following sets $A\subeq\N$. Do they agree?
+        \begin{enumerate}
+            \item $A\coloneqq\{n\in\N\st\fa m>1(m^2\ndiv n)\}$, the square-free integers.
+                \vspace{-0.05in}
+            \item $A\coloneqq$ prime numbers. \textsc{Hint:} Szemerédi vs. Green-Tao.
+                \vspace{-0.05in}
+            \item $A\coloneqq$ numbers with an odd number of digits.
+        \end{enumerate}
+    \end{exercise}
+
+    \begin{exercise}[Furstenberg-Sárközy]
+        Let $A\subeq\N$ be a subset with positive upper density and let $p\in\Z[x]$ be a polynomial with $p(0)=0$. Using the recurrence theorem below, prove that there exists $a,b\in A$ and some $n\geq1$ such that $x-y=p(n)$. \textsc{Hint:} Use the correspondence theorem.
+        \begin{center}
+            \begin{minipage}{0.95\textwidth}
+                \begin{theorem}[Polynomial Recurrence]
+                    Let $(X,\mu,T)$ be a measure-preserving dynamical system. For any positive-measure $A\subeq X$, there exists $n\geq1$ such that $\mu(A\cap T^{-p(n)}A)>0$.
+                \end{theorem}
+            \end{minipage}
+        \end{center}
+    \end{exercise}
+\end{document}

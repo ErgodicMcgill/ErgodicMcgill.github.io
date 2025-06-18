@@ -1,0 +1,83 @@
+\documentclass[reqno, twoside]{article}
+\input{preamble.sty}
+\input{macros.sty}
+
+\begin{document}
+    \title{\textbf{\normalsize\MakeUppercase{Summer 2025 Reading Group on Ergodic Theory}}}
+    \author{\normalsize\textsc{Exercise Sheet 8 (Zhaoshen Zhai): Correspondence Principles}}
+    \date{}
+    \maketitle
+    \freefootnote{\textit{Date}: \today.}
+
+    \begin{exercise}
+        Show that the following are equivalent.
+        \begin{center}
+            \begin{minipage}{0.95\textwidth}
+                \begin{theorem*}[Simple recurrence in open covers]
+                    Let $(U_\alpha)_\alpha$ be an open cover of a topological dynamical system\footnote{Recall that a \textit{topological dynamical system} is a pair $(X,T)$ consisting of a compact metrizable topological space $X$ and a continuous map $T:X\to X$.} $(X,T)$. There exists $\alpha$ such that $U_\alpha\cap T^{-n}U_\alpha\neq\e$ for infinitely many $n\in\N$.
+                \end{theorem*}
+                \begin{theorem*}[Infinite pigeonhole-principle]
+                    For any $c\geq1$, any $c$-colouring of $\Z$ always contains a colour class with infinitely-many elements.
+                \end{theorem*}
+                \begin{theorem*}[Finite pigeonhole-principle]
+                    For any $c,k\geq1$, there exists $N(c,k)$ such that if $n\geq N(c,k)$ and we colour $\l\{1,\dots,n\r\}$ by $c$ colours, then there is a colour class of at least $k$ elements.
+                \end{theorem*}
+            \end{minipage}
+        \end{center}
+    \end{exercise}
+
+    \begin{exercise}
+        Show that the following are equivalent.
+        \begin{center}
+            \begin{minipage}{0.95\textwidth}
+                \begin{theorem*}[Multiple recurrence in open covers]
+                    Let $(U_\alpha)_\alpha$ be an open cover of a topological dynamical system $(X,T)$. There exists $\alpha$ such that for each $k\geq1$, we have $\bigcap_{i<k}T^{-in}U_\alpha\neq\e$ for some $n\in\N$.
+                \end{theorem*}
+                \begin{theorem*}[Infinitary van der Waerden]
+                    For any $c\geq1$, any $c$-colouring of $\Z$ always contains a colour with arbitrarily long arithmetic progressions.
+                \end{theorem*}
+                \begin{theorem*}[Finitary van der Waerden]
+                    For any $c,k\geq1$, there exists $N(c,k)$ such that if $n\geq N(c,k)$ and we colour $\l\{1,\dots,n\r\}$ with $c$ colours, then there is a monochromatic $k$-term arithmetic progression.
+                \end{theorem*}
+            \end{minipage}
+        \end{center}
+    \end{exercise}
+
+    \begin{exercise}
+        Show that the following are equivalent.
+        \begin{center}
+            \begin{minipage}{0.95\textwidth}
+                \begin{theorem*}[Furstenberg's multiple recurrence; v1]
+                    Let $(X,\mc{B},\mu,T)$ be a measure-preserving dynamical system. For any $k\geq1$ and any set $A\in\mc{B}$ with positive measure, there exists $n\geq1$ such that
+                    \vspace{-0.05in}
+                    \begin{equation*}
+                        \mu(A\cap T^{-n}A\cap T^{-2n}A\cap\cdots\cap T^{-(k-1)n}A)>0.
+                        \vspace{-0.05in}
+                    \end{equation*}
+                \end{theorem*}
+                \begin{theorem*}[Furstenberg's multiple recurrence; v2]
+                    Let $(X,\mc{B},\mu,T)$ be a measure-preserving dynamical system. For any $k\geq1$ and any set $A\in\mc{B}$ with positive measure, we have
+                    \vspace{-0.05in}
+                    \begin{equation*}
+                        \liminf_{N\to\infty}\frac{1}{N}\sum_{n<N}\mu(A\cap T^{-n}A\cap T^{-2n}A\cap\cdots\cap T^{-(k-1)n}A)>0.
+                        \vspace{-0.05in}
+                    \end{equation*}
+                \end{theorem*}
+                \begin{theorem*}[Furstenberg's multiple recurrence; v3]
+                    Let $(X,\mc{B},\mu,T)$ be a measure-preserving dynamical system. For any $k\geq1$ and any $f\in L^\infty(X,\mu)$ with $f\geq0$ and $\int f\d\mu>0$, we have
+                    \vspace{-0.05in}
+                    \begin{equation*}
+                        \liminf_{N\to\infty}\frac{1}{N}\sum_{n<N}\int f(T^{-n}f)(T^{-2n}f)\cdots(T^{-(k-1)n}f)\,\d\mu>0.
+                        \vspace{-0.05in}
+                    \end{equation*}
+                \end{theorem*}
+                \begin{theorem*}[Infinitary Szemerédi]
+                    Any subset of $\Z$ with positive upper density contains arbitrarily long arithmetic progressions.
+                \end{theorem*}
+                \begin{theorem*}[Finitary Szemerédi]
+                    For any $\delta>0$ and $k\geq1$, there exists $N(\delta,k)$ such that if $n\geq N(\delta,k)$, then any subset of $\l\{1,\dots,n\r\}$ with at least $\delta n$ elements contains a $k$-term arithmetic progression.
+                \end{theorem*}
+            \end{minipage}
+        \end{center}       
+    \end{exercise}
+\end{document}

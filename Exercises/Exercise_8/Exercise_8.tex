@@ -2,19 +2,27 @@
 \input{preamble.sty}
 \input{macros.sty}
 
+\newcommand{\Clim}{\operatorname{C-lim}}
+\newcommand{\Csup}{\operatorname{C-sup}}
+\newcommand{\Dlim}{\operatorname{D-lim}}
+
 \begin{document}
     \title{\textbf{\normalsize\MakeUppercase{Summer 2025 Reading Group on Ergodic Theory}}}
-    \author{\normalsize\textsc{Exercise Sheet 8 (Zhaoshen Zhai): Correspondence Principles}}
+    \author{\normalsize\textsc{Exercise Sheet 8 (Zhaoshen Zhai): Correspondence principles;}\\\normalsize\textsc{The finite-infinite bridge; Baby steps towards the Structure Theorem.}}
     \date{}
     \maketitle
     \freefootnote{\textit{Date}: \today.}
+
+    The first three exercises explore further correspondence principles between Ramsey theory and dynamical systems, and also between finite and infinite Ramsey theory. You don't need to do all of them. The next few exercises are general lemmas used to study the structure of weak mixing and compact systems.
+
+    Throughout, we let $(X,\mc{B},\mu,T)$ be an invertible measure-preserving dynamical system, and recall that a \textit{topological dynamical} system is a pair $(X,T)$ consisting of a compact metrizable space $X$ and a homeomorphism $T:X\to X$. The invertibility conditions are not necessary, but are here for convenience.
 
     \begin{exercise}
         Show that the following are equivalent.
         \begin{center}
             \begin{minipage}{0.95\textwidth}
                 \begin{theorem*}[Simple recurrence in open covers]
-                    Let $(U_\alpha)_\alpha$ be an open cover of a topological dynamical system\footnote{Recall that a \textit{topological dynamical system} is a pair $(X,T)$ consisting of a compact metrizable topological space $X$ and a continuous map $T:X\to X$.} $(X,T)$. There exists $\alpha$ such that $U_\alpha\cap T^{-n}U_\alpha\neq\e$ for infinitely many $n\in\N$.
+                    Let $(U_\alpha)_\alpha$ be an open cover of a topological dynamical system $(X,T)$. There exists $\alpha$ such that $U_\alpha\cap T^{-n}U_\alpha\neq\e$ for infinitely many $n\in\N$.
                 \end{theorem*}
                 \begin{theorem*}[Infinite pigeonhole-principle]
                     For any $c\geq1$, any $c$-colouring of $\Z$ always contains a colour class with infinitely-many elements.
@@ -48,28 +56,13 @@
         \begin{center}
             \begin{minipage}{0.95\textwidth}
                 \begin{theorem*}[Furstenberg's multiple recurrence; v1]
-                    Let $(X,\mc{B},\mu,T)$ be a measure-preserving dynamical system. For any $k\geq1$ and any set $A\in\mc{B}$ with positive measure, there exists $n\geq1$ such that
-                    \vspace{-0.05in}
-                    \begin{equation*}
-                        \mu(A\cap T^{-n}A\cap T^{-2n}A\cap\cdots\cap T^{-(k-1)n}A)>0.
-                        \vspace{-0.05in}
-                    \end{equation*}
+                    For any $k\geq1$ and any set $A\in\mc{B}$ with positive measure, there exists $n\geq1$ such that $\mu(\bigcap_{i<k}T^{-in}A)>0$.
                 \end{theorem*}
                 \begin{theorem*}[Furstenberg's multiple recurrence; v2]
-                    Let $(X,\mc{B},\mu,T)$ be a measure-preserving dynamical system. For any $k\geq1$ and any set $A\in\mc{B}$ with positive measure, we have
-                    \vspace{-0.05in}
-                    \begin{equation*}
-                        \liminf_{N\to\infty}\frac{1}{N}\sum_{n<N}\mu(A\cap T^{-n}A\cap T^{-2n}A\cap\cdots\cap T^{-(k-1)n}A)>0.
-                        \vspace{-0.05in}
-                    \end{equation*}
+                    For any $k\geq1$ and any set $A\in\mc{B}$ with positive measure, we have $\liminf_{N\to\infty}\frac{1}{N}\sum_{n<N}\mu(\bigcap_{i<k}T^{-in}A)>0$
                 \end{theorem*}
                 \begin{theorem*}[Furstenberg's multiple recurrence; v3]
-                    Let $(X,\mc{B},\mu,T)$ be a measure-preserving dynamical system. For any $k\geq1$ and any $f\in L^\infty(X,\mu)$ with $f\geq0$ and $\int f\d\mu>0$, we have
-                    \vspace{-0.05in}
-                    \begin{equation*}
-                        \liminf_{N\to\infty}\frac{1}{N}\sum_{n<N}\int f(T^{-n}f)(T^{-2n}f)\cdots(T^{-(k-1)n}f)\,\d\mu>0.
-                        \vspace{-0.05in}
-                    \end{equation*}
+                    For any $k\geq1$ and any $f\in L^\infty(X,\mu)$ with $f\geq0$ and $\int f\d\mu>0$, we have $\liminf_{N\to\infty}\frac{1}{N}\sum_{n<N}\int\prod_{i<k}T^{-in}f\,\d\mu>0$.
                 \end{theorem*}
                 \begin{theorem*}[Infinitary Szemerédi]
                     Any subset of $\Z$ with positive upper density contains arbitrarily long arithmetic progressions.
@@ -78,6 +71,83 @@
                     For any $\delta>0$ and $k\geq1$, there exists $N(\delta,k)$ such that if $n\geq N(\delta,k)$, then any subset of $\l\{1,\dots,n\r\}$ with at least $\delta n$ elements contains a $k$-term arithmetic progression.
                 \end{theorem*}
             \end{minipage}
-        \end{center}       
+        \end{center}
+    \end{exercise}
+
+    \begin{definition*}
+        Let $(v_n)$ be a sequence in a Hilbert space $H$ and let $v\in H$.
+        \begin{enumerate}
+            \item We say that \textit{$v_n$ converges to $v$ in density}, and write $\Dlim_nv_n=v$, if $\l\{n\in\N\st\l\|v_n-v\r\|>\epsilon\r\}$ has zero upper density for each $\epsilon>0$.
+                \vspace{-0.05in}
+            \item We say that \textit{$v_n$ converges to $v$ in the Cesàro sense}, and write $\Clim_nv_n=v$, if $\lim_N\frac{1}{N}\sum_{n<N}v_n=v$.
+                \vspace{-0.05in}
+            \item The \textit{Cesàro supremum} of $v_n$ is $\Csup v_n\coloneqq\limsup_N\l\|\frac{1}{N}\sum_{n<N}v_n\r\|$.
+        \end{enumerate}
+    \end{definition*}
+
+    \begin{exercise}\label{equiv}
+        Let $(v_n)_n$ be a bounded sequence in a Hilbert space $H$ and let $v\in H$. 
+        \begin{enumerate}
+            \item[a)] Prove that $\Clim_nv_n=0$ iff $\Csup_nv_n=0$.
+                \vspace{-0.05in}
+            \item[b)] Prove that $\lim_nv_n=v$ implies $\Dlim_nv_n=v$, which in turn implies $\Clim v_n=v$.
+                \vspace{-0.05in}
+            \item[c)] Prove that $\Clim_n\l\|v_n-v\r\|=0$ iff $\Dlim_nv_n=v$.
+                \vspace{-0.05in}
+            \item[d)] What happens if $(v_n)$ is unbounded?
+        \end{enumerate}
+    \end{exercise}
+
+    \begin{definition*}
+        A measure-preserving dynamical system $(X,\mu,T)$ is said to be
+        \begin{enumerate}
+            \item \textit{mixing} if $\lim_n\l\langle T^{-n}f,g\r\rangle=\E(f)\E(g)$ for every $f,g\in L^2(X)$.
+                \vspace{-0.05in}
+            \item \textit{weak mixing} if $\Dlim_n\l\langle T^{-n}f,g\r\rangle=\E(f)\E(g)$ for every $f,g\in L^2(X)$.
+        \end{enumerate}
+    \end{definition*}
+
+    \begin{exercise}
+        Prove that $(X,\mu,T)$ is ergodic iff $\Clim_n\l\langle T^{-n}f,g\r\rangle=\E(f)\E(g)$ for all $f,g\in L^2(X)$.
+    \end{exercise}
+
+    \begin{exercise}[van der Corput Lemma]\label{van}
+        Let $(v_n)_n$ be a bounded sequence in a Hilbert space $H$. Prove that if $\Csup_h\Csup_n\l\langle v_n,v_{n+h}\r\rangle=0$, then $\Clim_nv_n=0$.
+
+        \textsc{Sketch}: Normalize $(v_n)$ and prove, via a telescoping estimate and averaging over $\l\{0,\dots,H-1\r\}$, that
+        \vspace{-0.05in}
+        \begin{equation*}
+            \raisebox{-2pt}{$\Biggl\|\,$}\frac{1}{N}\sum_{n<N}v_n\raisebox{-2pt}{$\Biggr\|$}^2\leq O\raisebox{-2pt}{$\Biggl(\!$}\frac{1}{H^2}\sum_{h,h'<H}\frac{1}{N}\sum_{n<N}\l\langle v_{n+h},v_{n+h'}\r\rangle\!\raisebox{-2pt}{$\Biggr)$}+O\l(\frac{H^2}{N^2}\r)
+            \vspace{-0.05in}
+        \end{equation*}
+        for any $N,H\geq1$. Use another telescoping argument to show that
+        \vspace{-0.05in}
+        \begin{equation*}
+            \Csup_n\l\langle v_{n+h},v_{n+h'}\r\rangle=\Csup_n\langle v_{n+|h-h'|},v_n\rangle
+            \vspace{-0.05in}
+        \end{equation*}
+        for any $h,h'<H$, and use this to eliminate $h'$.
+    \end{exercise}
+
+    \begin{definition*}
+        A function $f\in L^2(X)$ is \textit{weak mixing} if $\Dlim_n\l\langle T^{-n}f,f\r\rangle=0$.
+    \end{definition*}
+
+    \begin{exercise}
+        Show that for any weak mixing $f\in L^2(X)$, we have $\Dlim_n\l\langle T^{-n}f,g\r\rangle=0$ for every $g\in L^2(X)$. Deduce that $X$ is weak mixing iff every $f\in L^2(X)$ with mean zero is weak mixing.
+
+        \textsc{Hint:} Use Exercises \ref{equiv} and \ref{van}, and Cauchy-Schwarz.
+    \end{exercise}
+
+    \begin{exercise}
+        For any $f\in L^2(X)$, prove that $\l\{T^nf\st n\in\Z\r\}$ has compact closure in $L^2(X)$ iff for each $\epsilon>0$, the set $\l\{n\in\Z\st\l\|f-T^nf\r\|<\epsilon\r\}$ is syndetic. If any of these hold, we say that $f$ is \textit{almost periodic}.
+    \end{exercise}
+
+    \begin{exercise}
+        Prove that if $f$ is weak mixing and $g$ is almost periodic, then $\l\langle f,g\r\rangle=0$.
+    \end{exercise}
+
+    \begin{exercise}
+        Prove that the set $\mc{AP}(X)$ of almost periodic functions in $L^2(X)$ is closed.
     \end{exercise}
 \end{document}

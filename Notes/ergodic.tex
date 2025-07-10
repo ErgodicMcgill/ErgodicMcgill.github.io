@@ -881,6 +881,74 @@
 
     {\vspace{-0.1in}\small\subsection*{Further reading}\TODO.}
 
+    \section{(Frédéric Kai)}\label{sec:10}
+
+    \TODO
+
+    Let $G$ be a topological group, $G\act S$ Borel spaces with Borel action. A $\sigma$-finite measure $\mu$ on $S$ is \textit{quasi-invariant} under $G$ if for all $A\subeq S$ and $g\in G$, $\mu(Ag)=0$ iff $\mu(A)=0$. The action $G\act(S,\mu)$ is \textit{ergodic} if every $G$-invariant measurable set is either null or conull.
+
+    \begin{example}
+        If $H\subseq G$ is a closed subgroup, then $G\act G/H$ transitively, hence ergodic.
+    \end{example}
+
+    \begin{example}
+        $SL_2(\Z)\act\bb{H}$ acts by fractional linear transformations $z\l(
+        \begin{smallmatrix}
+            a & b \\
+            c & d
+        \end{smallmatrix}\r)=\frac{az+b}{cz+d}$. Instead of $\bb{H}$, let us take $\bar{R}=\R\cup\l\{\infty\r\}=SL_2(\R)/P$, where $P$ is the upper-triangular matrices.
+    \end{example}
+
+    \begin{question}
+        Given a Lie group $G$ and $H_1,H_2\subseq H$ closed subgroups, is $H_1\act G/H_2$ ergodic?
+    \end{question}
+
+    More generally, given an ergodic $G$-space $S$, is the action $H\act S$ ergodic given $H\subseq G$?
+
+    \begin{proposition}
+        Let $G$ be a locally-compact group with $S$ a $G$-space. If $H\subseq G$ is closed, then $H$ is ergodic on $S$ iff $G$ is ergodic on $S\times G/H$, where $(s,x)g\coloneqq(sg,xg)$.
+    \end{proposition}
+    \begin{proof}
+        If $A\subeq S\times G/H$ is $G$-invariant that is neither null nor conull, then for $x\in G/H$, consider $A_x\coloneqq\l\{s\in S\st(s,x)\in A\r\}$. Since $A$ is $G$-invariant, we have $A_xg=A_{xg}$. Since $G\act G/H$ is transitive, we have $A_{[e]}$ is neither null nor conull, and hence $A$ is neither null or conull. Since $[e]h=[e]$ for all $h\in H$, $A_{[e]}h=A_{[e]}$.
+
+        Conversely, if $B\subeq S$ is $H$-invariant, consider $\pi:G\to G/H$ and choose a section $\phi:G/H\to G$ such that $\phi$ is measurable, so $[\phi(x)]=x$. \TODO[DST MAGIC]. Define $A\coloneqq\l\{(s,x)\in S\times G/H\st s\in B\phi(x)\r\}$. Then $\phi(x,g)=h\phi(x)g$ for some $h\in H$, so $A$ is $G$-invariant since if $(s,x)\in A$, then $(s,x)g=(sg,sx)$ and $sg\in B\phi(x)g=Bh\phi(x)g=B\phi(xg)$.
+    \end{proof}
+
+    \begin{corollary}
+        If $H_1,H_2\subseq G$ are closed subgroups, then $H_1$ is ergodic on $G/H_2$ iff $H_2$ is ergodic on $G/H_1$.
+    \end{corollary}
+    \begin{proof}
+        Both are equivalent to $G$ being ergodic on $G/H_1\times G/H_2$.
+    \end{proof}
+
+    \begin{definition}
+        A \textit{lattice} $\Gamma\subseq G$ is a discrete subgroup such that the quotient $G/\Gamma$ has a finite invariant measure.
+    \end{definition}
+
+    \begin{example}
+        $\Z^n\subseq\R^n$ and $SL_n(\Z)\subseq SL_n(\R)$.
+    \end{example}
+
+    \begin{theorem}[Moore's Ergodic Theorem]
+        Let $G$ be a non-compact simple Lie group and let $\Gamma\subseq G$ be a lattice. If $H\subseq G$ is closed and non-compact, then $H\act G/\Gamma$ is ergodic.
+    \end{theorem}
+
+    \begin{remark}
+        Converse is true: if $H$ is compact, then $H\act G/\Gamma$ is not ergodic.
+    \end{remark}
+
+    \begin{corollary}
+        Let $H,\Gamma\subseq G$ be as above. Then $\Gamma\act G/H$ is ergodic iff $H$ is not compact.
+    \end{corollary}
+
+    Let $\Gamma\subseq SL_2(\R)$ be a lattice, say $\Gamma=SL_2(\Z)$. Then $\Gamma\act\bar{\R}$ is ergodic since $\bar{\R}=SL_2(\R)/P$ and $P$ is not compact. More generally, any lattice $\Gamma\subseq SL_n(\R)$ acts ergodically on $\R\P^{n-1}\iso SL_n(\R)/P$ where $P$ is the stabilizer of a line.
+
+    \begin{example}
+        $SL_n(\Z)$ acts ergodically on $\R^n$.
+    \end{example}
+
+    {\vspace{-0.1in}\small\subsection*{Further reading}\TODO.}
+
     \printbibliography
 
     {\footnotesize

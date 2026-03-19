@@ -36,6 +36,7 @@ function DeltaLatex(w1, w2) {
   function n(i, j) {
     return (i >= j) ? "1" : `n_{${i}${j}}`;
   }
+  
 
   // Recursive determinant for general square minor
   function det(R, C) {

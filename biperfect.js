@@ -29,27 +29,43 @@ function draw() {}
 
 // Returns the minor of N associated to w1, w2
 function DeltaLatex(w1, w2) {
-  w2.Print();
-  console.log(w1.nbOfNon0(), w2.nbOfNon0())
+  const rows = w1.idxOfNon0().map(i => i + 1);
+  const cols = w2.idxOfNon0().map(i => i + 1);
 
-  if (w1.nbOfNon0() === 2 && w2.nbOfNon0() === 2) {
-    let l1 = w1.idxOfNon0();
-    let l2 = w2.idxOfNon0();
-
-    let a = l1[0] + 1;
-    let b = l1[1] + 1;
-    let c = l2[0] + 1;
-    let d = l2[1] + 1;
-
-      function n(i, j) {
-      return (i >= j) ? "" : `n_{${i}${j}}`;
-    }
-
-    return `\\Delta_{(${w1.weight}),(${w2.weight})} 
-      = ${n(a, c)} ${n(b, d)} - ${n(a, d)} ${n(b, c)}`;
+  // Helper: get element label (1 on diagonal)
+  function n(i, j) {
+    return (i >= j) ? "1" : `n_{${i}${j}}`;
   }
 
-  return "\\text{Only 2x2 minors implemented}";
+  // Recursive determinant for general square minor
+  function det(R, C) {
+    const m = R.length;
+    if (m === 2) {
+      // 2x2 base case
+      return `${n(R[0], C[0])} ${n(R[1], C[1])} - ${n(R[0], C[1])} ${n(R[1], C[0])}`;
+    }
+
+    let terms = [];
+    for (let j = 0; j < m; j++) {
+      // Sign: + - + - ...
+      const sign = (j % 2 === 0) ? "" : "-";
+      // Remaining rows and columns
+      const subR = R.slice(1);
+      const subC = C.filter((_, idx) => idx !== j);
+      // Recursive call
+      const subDet = det(subR, subC);
+      terms.push(`${sign}${n(R[0], C[j])}(${subDet})`);
+    }
+    return terms.join(" + ");
+  }
+
+  // Return full LaTeX<
+  console.log(det(rows, cols));
+  return `\\Delta_{(${w1.weight}),(${w2.weight})} = ${det(rows, cols)}`;
+  //return `\\Delta_{(${w1.weight}),(${w2.weight})} = ${normalizePolynomial(det(rows, cols))}`;
+
+
+  
 }
 
 function computeDelta() {
@@ -66,6 +82,26 @@ function computeDelta() {
 
 
 function parseWeight(str) {
+
+    if (/w\d+/.test(str)) {
+    // Split by + signs
+    let parts = str.split('+').map(s => s.trim());
+
+    // Start with zero vector
+    let arr = new Array(n + 1).fill(0);
+
+    // Add each fundamental weight
+    parts.forEach(p => {
+      let idx = parseInt(p.replace('w','')) - 1; // wi -> index i-1
+      for (let j = 0; j <= idx; j++) {
+        arr[j] += 1;
+      }
+    });
+    console.log(arr);
+    return new Weight(arr);
+  }
+
+
   str = str.replace(/[()]/g, '');
 
   let parts = str.split(',');
@@ -102,4 +138,37 @@ function Reverse(l) {
   }
 
   return list;
+}
+
+
+function normalizePolynomial(polyStr) {
+  // Step 1: split into monomials, keeping signs
+  let monomials = polyStr.split(/(?=[+-])/).map(s => s.trim());
+
+  // Step 2: helper to get sort key from a factor
+  function factorKey(fac) {
+    if (fac === "(1)") return [Infinity, Infinity]; // put (1) last
+    let match = fac.match(/n_\{(\d+)(\d+)\}/);
+    if (match) return [parseInt(match[1]), parseInt(match[2])];
+    return [Infinity, Infinity];
+  }
+
+  // Step 3: get monomial key
+  function monomialKey(mon) {
+    // split monomial into factors (assume separated by spaces)
+    let factors = mon.replace(/^[+-]\s*/, '').split(/\s+/);
+    // use **first factor's key** as main sorting key
+    return factorKey(factors[0]);
+  }
+
+  // Step 4: sort monomials
+  monomials.sort((a, b) => {
+    let ka = monomialKey(a);
+    let kb = monomialKey(b);
+    if (ka[0] !== kb[0]) return ka[0] - kb[0];
+    return ka[1] - kb[1];
+  });
+
+  // Step 5: return normalized polynomial
+  return monomials.join(" ");
 }

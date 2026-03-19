@@ -123,6 +123,8 @@ outline: none;
 }
 
 button:focus {
+
+    
 border-color: #4CAF50; /* highlight when selected */
 }
 

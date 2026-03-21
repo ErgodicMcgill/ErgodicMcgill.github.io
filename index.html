@@ -11,10 +11,14 @@
 
     <script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.min.js"></script>
     <script src="Weight.js" defer></script>
+    <script src="Monomial.js" defer></script>
+    <script src="Polynomial.js" defer></script>
+    <script src="Wedge.js" defer></script>
     <script src="biperfect.js" defer></script>   
 
     <body>
       <p>
+        DONT LOOK AT THIS !!!!
         Enter \(w_1 = \) <input id="w1" value="(1,0,1,0)">
         and \(w_2 = \) <input id="w2" value="(0,0,1, 1)">
       </p>
@@ -23,6 +27,15 @@
       </div>
       <p id="output"> </p>
 
+
+     <p>
+        Enter sum of wedges \(\gamma_1 = \) <input id="g1" value="e1Ve2">
+        and \(\gamma_2 = \) <input id="g2" value="e1Ve3">
+      </p>
+      <div class="center">
+      <button onclick="computeDeltaFromWedge()"> Compute \(\Delta_{\gamma_1,\gamma_2} = v_{\gamma_1}^*(Nv_{\gamma_2})\)</button>
+      </div>
+      <p id="outputWedge"> </p>
       
 
     </body>

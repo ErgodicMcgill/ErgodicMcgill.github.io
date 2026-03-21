@@ -4,28 +4,104 @@ let n = 3;
 
 function setup() {
   createCanvas(200, 200);
+ 
+  let w = new Wedge(new Monomial([], [], 1), [1,3]);
+  w.Print();
+let result = applyNtoWedge(w);
 
-  let w1 = new Weight(1);
-  let w2 = new Weight(2);
-
-  w2.Print();
-
-  let s2w2 = w2.actByS(2);
-
-  let l = [2, 1, 3, 2];
-  let s2132w2 = w2.actByS(l);
-
-  //console.log(Delta(s2w2, s2132w2));
-
-  let w1w3 = new Weight(2, 1, 1, 0);
-
-let w = new Weight(0,0,1,1);
-w.Print();
-console.log(w.nbOfNon0());
+Wedge.Print(result);
 
 }
 
 function draw() {}
+
+
+function computeDeltaFromWedge() {
+
+  let w1 = parseWedge(document.getElementById("g1").value);
+  let w2 = parseWedge(document.getElementById("g2").value);
+
+  w1.Print();
+  w2.Print();
+  w2 = applyNtoWedge(w2);
+  Wedge.Print(w2);
+
+  let result = Wedge.DualActOnSum(w1, w2);
+  Wedge.Print(result);
+
+  let latex = Wedge.latexFormat(result);
+  let output = document.getElementById("outputWedge");
+  output.innerHTML = "$$" + latex + "$$";
+
+  MathJax.typesetPromise([outputWedge]);
+}
+
+
+// parseWedge: takes string like "e1Ve2Ve3" and returns a Wedge object
+function parseWedge(str) {
+  // remove spaces
+  str = str.replace(/\s+/g, '');
+
+  // split by 'V' (capital or lowercase)
+  let parts = str.split(/V/i);
+
+  // extract the indices as integers
+  let terms = [];
+  for (let p of parts) {
+    if (p.startsWith('e')) {
+      let idx = parseInt(p.substring(1));
+      if (isNaN(idx)) {
+        console.error("Invalid index in wedge: " + p);
+        return null;
+      }
+      terms.push(idx);
+    } else {
+      console.error("Invalid wedge format: " + p);
+      return null;
+    }
+  }
+
+  // create Wedge with coef = 1
+  let w = new Wedge(new Monomial([], [], 1), terms);
+  return w;
+}
+
+
+
+
+// applyNtoWedge: symbolic action of N on a single wedge
+// returns Wedge[] (sum of wedges with polynomial coefficients)
+function applyNtoWedge(wedge) {
+  // helper: apply N to a single basis vector e_i
+  function Ne_i(i) {
+    let sum = [new Wedge(new Monomial([], [], 1), [i])]; // e_i term
+    for (let j = 1; j < i; j++) { // j < i
+      let coef = new Monomial(j,i); // symbolic n_ji
+      sum.push(new Wedge(new Polynomial(coef), [j]));
+    }
+    return sum; // Wedge[]
+  }
+
+  // start with a single "empty wedge" sum
+  let result = [new Wedge(new Monomial([], [], 1), [])];
+
+  // loop over each basis element in the wedge
+  for (let i of wedge.terms) {
+    let Ne_i_sum = Ne_i(i);
+    result = Wedge.wedgeSums(result, Ne_i_sum);
+  }
+
+  // multiply each wedge by original wedge coefficient
+  result.forEach(w => {
+    w.coef = Polynomial.multiplyPoly(w.coef, wedge.coef);
+  });
+
+  return result;
+}
+
+
+
+
 
 // Returns the minor of N associated to w1, w2
 function DeltaLatex(w1, w2) {
@@ -36,7 +112,7 @@ function DeltaLatex(w1, w2) {
   function n(i, j) {
     return (i >= j) ? "1" : `n_{${i}${j}}`;
   }
-  
+
 
   // Recursive determinant for general square minor
   function det(R, C) {
@@ -63,11 +139,12 @@ function DeltaLatex(w1, w2) {
   // Return full LaTeX<
   console.log(det(rows, cols));
   return `\\Delta_{(${w1.weight}),(${w2.weight})} = ${det(rows, cols)}`;
-  //return `\\Delta_{(${w1.weight}),(${w2.weight})} = ${normalizePolynomial(det(rows, cols))}`;
-
-
-  
+  //return `\\Delta_{(${w1.weight}),(${w2.weight})} = ${normalizePolynomial(det(rows, cols))}`;  
 }
+
+
+
+
 
 function computeDelta() {
   let w1 = parseWeight(document.getElementById("w1").value);

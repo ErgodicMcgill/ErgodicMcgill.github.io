@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Ergodic Theory</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
+        <link rel="stylesheet" href="DRP2026/style.css">
+    </head>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.min.js"></script>
+    <script src="DRP2026/Weight.js" defer></script>
+    <script src="DRP2026/Monomial.js" defer></script>
+    <script src="DRP2026/Polynomial.js" defer></script>
+    <script src="DRP2026/Wedge.js" defer></script>
+    <script src="DRP2026/biperfect.js" defer></script>   
+
+    <body>
+
+      <a href="ErgodicMcGIll/Oldindex.html"> Here </a>
+
+      <p>
+        DONT LOOK AT THIS !!!!
+        Enter \(w_1 = \) <input id="w1" value="(1,0,1,0)">
+        and \(w_2 = \) <input id="w2" value="(0,0,1, 1)">
+      </p>
+      <div class="center">
+      <button onclick="computeDelta()"> Compute \(\Delta_{w_1,w_2}\)</button>
+      </div>
+      <p id="output"> </p>
+
+ 
+     <p>
+        Enter wedges \(\gamma_1 = \) <input id="g1" value="e1Ve2">
+        and \(\gamma_2 = \) <input id="g2" value="e1Ve3">
+      </p>
+      <div class="center">
+      <button onclick="computeDeltaFromWedge()"> Compute \(\Delta_{\gamma_1,\gamma_2} = v_{\gamma_1}^*(Nv_{\gamma_2})\)</button>
+      </div>
+      <p id="outputWedge"> </p>
+      
+
+    </body>
+
+</html>

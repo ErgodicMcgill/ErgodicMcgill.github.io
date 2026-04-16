@@ -71,7 +71,7 @@ h3 {
 }
 /* Example paragraph style */
 p {
-    font-size: 1em;
+    font-size: .4em;
     line-height: 1.6;
     margin: 10px;
     text-align: left;
@@ -92,39 +92,5 @@ p3{
     margin-top: 0px;
     text-align: left;
     margin-left: 5%;
-}
-
-
-input {
-width: 150px;          /* controls horizontal size */
-padding: 6px 10px;     /* inner spacing */
-font-size: 16px;
-border: 1px solid #ccc;
-border-radius: 6px;    /* rounded corners */
-outline: none;
-}
-
-input:focus {
-border-color: #4CAF50; /* highlight when selected */
-}
-
-.center {
-  text-align: center;
-  margin-top: 10px;
-}
-
-button {
-width: 150px;          /* controls horizontal size */
-padding: 6px 10px;     /* inner spacing */
-font-size: 16px;
-border: 1px solid #ccc;
-border-radius: 6px;    /* rounded corners */
-outline: none;
-}
-
-button:focus {
-
-    
-border-color: #4CAF50; /* highlight when selected */
 }
 
